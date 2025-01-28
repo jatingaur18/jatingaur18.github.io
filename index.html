@@ -333,11 +333,42 @@
                 </div>
             </div>
             <!-- Add more account cards as needed -->
+            <div id="game-link"></div>
         </section>
     </div>
 
     <script>
-        // Smooth scrolling for navigation links
+fetch('https://lichess.org/api/games/user/jatin25chess?max=1', {
+    headers: {
+        'Accept': 'application/x-ndjson'
+    }
+})
+.then(response => response.text())
+.then(data => {
+    const gameData = JSON.parse(data);
+    const gameId = gameData.id;
+    
+    const gameLinkDiv = document.getElementById('game-link');
+    gameLinkDiv.innerHTML = `
+        <div style="margin-top: 2rem;">
+            <h3 style="margin-bottom: 1rem;">My Latest Chess Game</h3>
+            <iframe 
+                src="https://lichess.org/embed/${gameId}"
+                width="600" 
+                height="400" 
+                frameborder="0"
+                style="max-width: 100%; border-radius: 8px; background: #262421;"
+                allowtransparency="true"
+            ></iframe>
+        </div>
+    `;
+})
+.catch(error => {
+    console.error('Error fetching the last game:', error);
+    const gameLinkDiv = document.getElementById('game-link');
+    gameLinkDiv.innerHTML = '<p>Unable to load latest game at this time.</p>';
+});
+
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
