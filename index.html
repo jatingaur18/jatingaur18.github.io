@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #BB86FC;
+            --card-bg: #1E1E1E;
+            --hover-color: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        nav {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h1, h2 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background-color: var(--hover-color);
+        }
+
+        .card img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        .date {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item, .experience-item {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        #about {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #about img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+        }
+        .account-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s;
+            cursor: pointer;
+            height: 60px; /* One finger thickness */
+        }
+
+        .account-card:hover {
+            transform: translateY(-3px);
+            background-color: var(--hover-color);
+        }
+
+        .account-card .logo {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-card .card-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .account-card h3 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#Accounts">Accounts</a></li>
+            <!-- <li><a href="blogs.html">Blog</a></li> -->
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="about">
+            <img src="./image.png" alt="Profile Picture">
+            <h1>Jatin Gaur</h1>
+            <p>I am a Pre-Final Year B.Tech student at IIIT Naya Raipur, exploring Computer Science. <br>
+                With some silly projects in Web Development and Machine Learning, <br>
+                Also tried some Competitive Programming,<br>
+                Outside coding, I'm an decent chess player</p>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Electrical and Communication Engineering</h3>
+                <p>IIIT Naya Raipur | 2022-2026</p> <p>GPA : 8.36</p>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>SAMSUNG - Research and Development Intern</h3>
+                <p>Sept 2024 - Present</p>
+                <p> Automated the process of generating Gazebo world with 100+ unique objects integration and physics simulation by designing a optimal python script to convert json to .world file</p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/JobQuest'">
+                <img src="jobquest.png" alt="Project 1">
+                <div class="card-content">
+                    <h3>JobQuest</h3>
+                    <p>Designed a web app tracking applications, generating skill tests based on job descriptions using AI, and improving
+                        applicant screening by 40%.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/Guitar_Transcription'">
+                <img src="image copy 2.png" alt="Project 2">
+                <div class="card-content">
+                    <h3>Guitar Transcriber</h3>
+                    <p>Developed a Random Forest-based audio transcriber with 93% accuracy, recognizing guitar chords using optimized onset detection and feature extraction techniques like MFCC and spectrogram.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/lb'">
+                <img src="image copy 4.png" alt="Project 3">
+                <div class="card-content">
+                    <h3>Load Balancer</h3>
+                    <p>A multi-threaded, event based load balancer written from scratch in C++ using socket api.Uses thread pooling and a very basic implementation of event loop using epoll to select readable and writable file descriptors.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/Hack-a-sol'">
+                <img src="image copy 3.png" alt="Project 4">
+                <div class="card-content">
+                    <h3>PL Prediction</h3>
+                    <p>Developed a performance prediction model for football players using scraped match data, leveraging machine learning algorithms like Random Forest, XGBoost, and GBR to forecast stats against specific opponents.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/MNIST_NeuralNetwork_project'">
+                <img src="image copy 5.png" alt="Project 5">
+                <div class="card-content">
+                    <h3>Digit Recognition</h3>
+                    <p>Built a two-hidden-layer neural network from scratch for MNIST digit classification, extending a one-hidden-layer architecture to achieve accurate digit recognition with a custom implementation.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/Network-Slicing-Classification'">
+                <img src="image copy 7.png" alt="Project 6">
+                <div class="card-content">
+                    <h3>Network Slicing Classification with KNN</h3>
+                    <p>A machine learning project that builds and evaluates a KNN classifier to predict 5G network slicing types (eMBB, URLLC, mMTC) based on key network performance metrics.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/movie-hunt'">
+                <img src="movie hunt green.jpg" alt="Project 7">
+                <div class="card-content">
+                    <h3>Movie Hunt</h3>
+                    <p>A movie guessing game where players guess the movie name based on its plot overview, with hints like release year, genre, and letters revealed progressively, generating a score based on hints used.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/music'">
+                <img src="image copy.png" alt="Project 8">
+                <div class="card-content">
+                    <h3>Music analysis</h3>
+                    <p>This platform allows users to upload songs, and our system will predict the emotion of the song using machine learning. The predicted emotions are then stored in playlists, and users can listen to their uploaded songs at any time on our website.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/food_ordering_app'">
+                <img src="image copy 6.png" alt="Project 9">
+                <div class="card-content">
+                    <h3>Food Orgering app</h3>
+                    <p>This is a simple food ordering app built using Python and the Tkinter library. The app allows users to browse a menu, select items, and place an order. It also has an admin section for managing staff and dishes.</p>
+                </div>
+            </div>
+        </section>
+        <section id="Accounts">
+            <h2>Accounts</h2>
+            <div class="account-card" onclick="window.location.href='https://codeforces.com/profile/jugheadjones'">
+                <div class="logo">
+                    <svg fill="#ffffff" width="800px" height="800px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M 3.25,4.75 C 3.664,4.75 4,5.086 4,5.5 l 0,5.25 C 4,11.164 3.664,11.5 3.25,11.5 l -1.5,0 C 1.3365,11.5 1,11.164 1,10.75 L 1,5.5 C 1,5.086 1.3365,4.75 1.75,4.75 l 1.5,0 z M 7.75,2.5 c 0.414,0 0.75,0.336 0.75,0.75 l 0,7.5 c 0,0.414 -0.336,0.75 -0.75,0.75 l -1.5,0 C 5.8365,11.5 5.5,11.164 5.5,10.75 l 0,-7.5 C 5.5,2.836 5.8365,2.5 6.25,2.5 l 1.5,0 z m 4.5,3.75 C 12.664,6.25 13,6.586 13,7 l 0,3.75 c 0,0.414 -0.336,0.75 -0.75,0.75 l -1.5,0 C 10.336,11.5 10,11.164 10,10.75 L 10,7 c 0,-0.414 0.336,-0.75 0.75,-0.75 l 1.5,0 z"/></svg>
+                </div>
+                <div class="card-content">
+                    <h3>Codeforces</h3>
+                    <p>1489</p>
+                </div>
+            </div>
+            <div class="account-card" onclick="window.location.href='https://leetcode.com/jatingaur18'">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="var(--accent-color)">
+                        <path d="M16.102 17.93l-2.697 2.607c-.466.467-1.111.662-1.823.662s-1.357-.195-1.824-.662l-4.332-4.363c-.467-.467-.702-1.15-.702-1.863s.235-1.357.702-1.824l4.319-4.38c.467-.467 1.125-.645 1.837-.645s1.357.195 1.823.662l2.697 2.606c.514.515 1.365.497 1.9-.038.535-.536.553-1.387.039-1.901l-2.609-2.636a5.055 5.055 0 0 0-2.445-1.337l2.467-2.503c.516-.514.498-1.366-.037-1.901-.535-.535-1.387-.552-1.901-.038l-10.1 10.101c-.981.982-1.494 2.337-1.494 3.835 0 1.498.513 2.895 1.494 3.875l4.347 4.361c.981.981 2.312 1.494 3.81 1.494 1.497 0 2.829-.513 3.809-1.494l2.697-2.607c.515-.515.498-1.366-.037-1.901-.534-.535-1.386-.553-1.901-.038z"/>
+                    </svg>
+                </div>
+                <div class="card-content">
+                    <h3>LeetCode</h3>
+                    <p>1697</p>
+                </div>
+            </div>
+            <div class="account-card" onclick="window.location.href='https://www.chess.com/stats/overview/jughead_iv/0'">
+                <div class="logo">
+                    <svg width="800px" height="800px" viewBox="0 0 50.8 50.8" xmlns="http://www.w3.org/2000/svg" xml:space="preserve">
+
+                        <g style="stroke-width:1.00012;stroke-dasharray:none">
+                        
+                        <path d="m29.084 17.202 4.752 3.087c.037 1.357-.699 2.623-.699 2.623H29.09c-.883 6.963 6.255 11.358 6.255 11.358 3.9 3.11 3.385 8.283 3.385 8.283s-.055.867-3.476 1.66c0 0-2.98.96-12.944.69" style="fill:none;stroke:#50C878;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"/>
+                        
+                        <path d="m21.82 17.256-4.72 3.033c-.036 1.357.7 2.623.7 2.623h4.047c.883 6.963-6.255 11.358-6.255 11.358-3.9 3.11-3.385 8.283-3.385 8.283s.055.867 3.476 1.66c0 0 2.979.96 12.944.69" style="fill:none;stroke:#50C878;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"/>
+                        
+                        <path d="M11.13-25.59a6.26 6.352 0 0 1-6.122 4.238A6.26 6.352 0 0 1-.81-26.011a6.26 6.352 0 0 1 2.64-7.027 6.26 6.352 0 0 1 7.397.453" style="fill:none;stroke:#50C878;stroke-width:3.17506;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none" transform="matrix(-.26297 .9648 -.96701 -.25472 0 0)"/>
+                        
+                        </g>
+                        
+                        </svg>
+                </div>
+                <div class="card-content">
+                    <h3>Chess.com</h3>
+                    <p>1630</p>
+                </div>
+            </div>
+            <div class="account-card" onclick="window.location.href='https://lichess.org/@/jatin25chess/perf/rapid'">
+                <div class="logo">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M10.457 6.161a.237.237 0 0 0-.296.165c-.8 2.785 2.819 5.579 5.214 7.428.653.504 1.216.939 1.591 1.292 1.745 1.642 2.564 2.851 2.733 3.178a.24.24 0 0 0 .275.122c.047-.013 4.726-1.3 3.934-4.574a.257.257 0 0 0-.023-.06L18.204 3.407 18.93.295a.24.24 0 0 0-.262-.293c-1.7.201-3.115.435-4.5 1.425-4.844-.323-8.718.9-11.213 3.539C.334 7.737-.246 11.515.085 14.128c.763 5.655 5.191 8.631 9.081 9.532.993.229 1.974.34 2.923.34 3.344 0 6.297-1.381 7.946-3.85a.24.24 0 0 0-.372-.3c-3.411 3.527-9.002 4.134-13.296 1.444-4.485-2.81-6.202-8.41-3.91-12.749C4.741 4.221 8.801 2.362 13.888 3.31c.056.01.115 0 .165-.029l.335-.197c.926-.546 1.961-1.157 2.873-1.279l-.694 1.993a.243.243 0 0 0 .02.202l6.082 10.192c-.193 2.028-1.706 2.506-2.226 2.611-.287-.645-.814-1.364-2.306-2.803-.422-.407-1.21-.941-2.124-1.56-2.364-1.601-5.937-4.02-5.391-5.984a.239.239 0 0 0-.165-.295z"style="fill:none;stroke:#ffffff"/></svg>
+                </div>
+                <div class="card-content">
+                    <h3>Chess.com</h3>
+                    <p>2068</p>
+                </div>
+            </div>
+            <!-- Add more account cards as needed -->
+        </section>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
