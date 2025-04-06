@@ -360,7 +360,7 @@
     </div>
 
     <script>
-        fetch('https://lichess.org/api/games/user/jatin25chess?max=1', {
+        fetch('https://lichess.org/api/games/user/bot-whiteworm?max=1', {
             headers: {
                 'Accept': 'application/x-ndjson'
             }
@@ -374,7 +374,7 @@
             const gameLinkDiv = document.getElementById('game-link');
             gameLinkDiv.innerHTML = `
                 <div style="margin-top: 2rem;">
-                    <h3 style="margin-bottom: 1rem;">My Latest Chess Game</h3>
+                    <h3 style="margin-bottom: 1rem;">My Chess Bot's Latest Game</h3>
                     <iframe 
                         src="https://lichess.org/embed/${gameId}"
                         width="600" 
