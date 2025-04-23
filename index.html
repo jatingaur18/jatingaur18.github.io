@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Jatin Gaur | Portfolio</title>
     <style>
         :root {
             --bg-color: #121212;
@@ -24,6 +24,39 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #1a1a1a, #2a1a3a, #3a1a2a, #1a2a3a);
+            background-size: 400%;
+            animation: gradientShift 15s ease infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particle Canvas */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         nav {
@@ -57,6 +90,8 @@
             max-width: 1200px;
             margin: 80px auto 0;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         section {
@@ -75,13 +110,14 @@
             margin-bottom: 1.5rem;
             display: flex;
             gap: 2rem;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
 
         .card:hover {
             transform: translateY(-5px);
             background-color: var(--hover-color);
+            box-shadow: 0 8px 20px rgba(187, 134, 252, 0.2);
         }
 
         .card img {
@@ -106,6 +142,12 @@
             padding: 1.5rem;
             border-radius: 8px;
             margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .education-item:hover, .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(187, 134, 252, 0.2);
         }
 
         #about {
@@ -119,7 +161,13 @@
             height: 200px;
             border-radius: 50%;
             margin-bottom: 2rem;
+            transition: transform 0.3s;
         }
+
+        #about img:hover {
+            transform: scale(1.05);
+        }
+
         .account-card {
             background-color: var(--card-bg);
             border-radius: 8px;
@@ -128,14 +176,15 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
-            height: 60px; /* One finger thickness */
+            height: 60px;
         }
 
         .account-card:hover {
             transform: translateY(-3px);
             background-color: var(--hover-color);
+            box-shadow: 0 8px 20px rgba(187, 134, 252, 0.2);
         }
 
         .account-card .logo {
@@ -156,8 +205,9 @@
         .account-card h3 {
             margin: 0;
         }
-        .resume-button { /* Purple color matching your portfolio theme */
-            color: #BB86FC;
+
+        .resume-button {
+            color: var(--accent-color);
             margin-top: 10px;
             padding: 10px 20px;
             border-radius: 5px;
@@ -167,13 +217,17 @@
             font-weight: 500;
         }
 
-        .resume-button:hover {/* Darker purple on hover */
+        .resume-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 2px 8px rgba(187, 134, 252, 0.3);
         }
     </style>
 </head>
 <body>
+    <!-- Background Animation -->
+    <div class="background-animation"></div>
+    <canvas id="particles"></canvas>
+
     <nav>
         <ul>
             <li><a href="#about">About</a></li>
@@ -181,7 +235,6 @@
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#Accounts">Accounts</a></li>
-            <!-- <li><a href="blogs.html">Blog</a></li> -->
         </ul>
     </nav>
 
@@ -193,7 +246,7 @@
                 With some silly projects in Web Development and Machine Learning, <br>
                 Also tried some Competitive Programming,<br>
                 Outside coding, I'm a decent chess player</p>
-            <a href="https://drive.google.com/file/d/12S8orpZF9e33Km_1vNeRA02Lgujei9G2/view" class="resume-button" target="_blank">Resume</a>
+            <a href="https://drive.google.com/file/d/1tObzNv32gG7ML-NJR54gHa1q-v6SqLG9/view" class="resume-button" target="_blank">Resume</a>
         </section>
 
         <section id="education">
@@ -223,18 +276,25 @@
                         applicant screening by 40%.</p>
                 </div>
             </div>
-            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/Guitar_Transcription'">
-                <img src="image copy 2.png" alt="Project 2">
-                <div class="card-content">
-                    <h3>Guitar Transcriber</h3>
-                    <p>Developed a Random Forest-based audio transcriber with 93% accuracy, recognizing guitar chords using optimized onset detection and feature extraction techniques like MFCC and spectrogram.</p>
-                </div>
-            </div>
             <div class="card" onclick="window.location.href='https://github.com/jatingaur18/lb'">
                 <img src="image copy 4.png" alt="Project 3">
                 <div class="card-content">
                     <h3>Load Balancer</h3>
                     <p>A multi-threaded, event based load balancer written from scratch in C++ using socket api.Uses thread pooling and a very basic implementation of event loop using epoll to select readable and writable file descriptors.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/Chess-Engine'">
+                <img src="image copy 8.png" alt="Project 2">
+                <div class="card-content">
+                    <h3>Chess Engine</h3>
+                    <p>Developed a high-performance chess engine using bitboards, achieving real-time move generation and search optimization.The engine powers a 1700–1800 rated bot on Lichess, handling 50K+ nodes/sec with advanced pruning and parallelism.</p>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='https://github.com/jatingaur18/Guitar_Transcription'">
+                <img src="image copy 2.png" alt="Project 2">
+                <div class="card-content">
+                    <h3>Guitar Transcriber</h3>
+                    <p>Developed a Random Forest-based audio transcriber with 93% accuracy, recognizing guitar chords using optimized onset detection and feature extraction techniques like MFCC and spectrogram.</p>
                 </div>
             </div>
             <div class="card" onclick="window.location.href='https://github.com/jatingaur18/Hack-a-sol'">
@@ -268,14 +328,14 @@
             <div class="card" onclick="window.location.href='https://github.com/jatingaur18/music'">
                 <img src="image copy.png" alt="Project 8">
                 <div class="card-content">
-                    <h3>Music analysis</h3>
+                    <h3>Music Analysis</h3>
                     <p>This platform allows users to upload songs, and our system will predict the emotion of the song using machine learning. The predicted emotions are then stored in playlists, and users can listen to their uploaded songs at any time on our website.</p>
                 </div>
             </div>
             <div class="card" onclick="window.location.href='https://github.com/jatingaur18/food_ordering_app'">
                 <img src="image copy 6.png" alt="Project 9">
                 <div class="card-content">
-                    <h3>Food Ordering app</h3>
+                    <h3>Food Ordering App</h3>
                     <p>This is a simple food ordering app built using Python and the Tkinter library. The app allows users to browse a menu, select items, and place an order. It also has an admin section for managing staff and dishes.</p>
                 </div>
             </div>
@@ -286,7 +346,7 @@
                 <div class="logo">
                     <svg width="259.3px" height="259.3px" viewBox="-1.65 0 259.3 259.3" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
                         <g>
-                            <path fill="#9EDCF2" d="M200.9,199.8c0,13.9-32.2,25.1-71.9,25.1c-39.7,0-71.9-11.3-71.9-25.1c0-13.9,32.2-25.1,71.9-25.1C168.7,174.7,200.9,185.9,200.9,199.8L200.9,199.8z M200.9,199.8" />
+                            <path fill="#BB86FC" d="M200.9,199.8c0,13.9-32.2,25.1-71.9,25.1c-39.7,0-71.9-11.3-71.9-25.1c0-13.9,32.2-25.1,71.9-25.1C168.7,174.7,200.9,185.9,200.9,199.8L200.9,199.8z M200.9,199.8" />
                             <g>
                                 <defs>
                                     <path id="SVGID_1_" d="M98.1,244.8c1.6,7.5,5.5,11.9,9.4,14.5l41.1,0c5-3.4,10.1-9.8,10.1-21.8v-31c0,0,0.6-7.7,7.7-10.2c0,0,4.1-2.9-0.3-4.5c0,0-19.5-1.6-19.5,14.4v23.6c0,0,0.8,8.7-3.8,12.3v-29.2c0,0,0.3-9.3,5.1-12.8c0,0,3.2-5.7-3.8-4.2c0,0-13.4,1.9-14,17.6l-0.3,30h-3.2l-0.3-30c-0.6-15.6-14-17.6-14-17.6c-7-1.6-3.8,4.2-3.8,4.2c4.8,3.5,5.1,12.8,5.1,12.8v29.5c-4.6-3.3-3.8-12.6-3.8-12.6v-23.6c0-16-19.5-14.4-19.5-14.4c-4.5,1.6-0.3,4.5-0.3,4.5c7,2.6,7.7,10.2,7.7,10.2v21.7L98.1,244.8z" />
@@ -295,18 +355,18 @@
                                     <use xlink:href="#SVGID_1_" overflow="visible" />
                                 </clipPath>
                                 <path clip-path="url(#SVGID_2_)" fill="#7DBCE7" d="M200.9,199.8c0,13.9-32.2,25.1-71.9,25.1c-39.7,0-71.9-11.3-71.9-25.1c0-13.9,32.2-25.1,71.9-25.1C168.7,174.7,200.9,185.9,200.9,199.8L200.9,199.8z M200.9,199.8" />
-                            </g><path fill="#9EDCF2" d="M46.9,125.9l-2.1,7.2c0,0-0.5,2.6,1.9,3.1c2.6-0.1,2.4-2.5,2.2-3.2L46.9,125.9L46.9,125.9z M46.9,125.9" /><path fill="#010101" d="M255.8,95.6l0.2-0.9c-21.1-4.2-42.7-4.3-55.8-3.7c2.1-7.7,2.8-16.7,2.8-26.6c0-14.3-5.4-25.7-14-34.3c1.5-4.9,3.5-15.8-2-29.7c0,0-9.8-3.1-32.1,11.8c-8.7-2.2-18-3.3-27.3-3.3c-10.2,0-20.5,1.3-30.2,3.9C74.4-2.9,64.3,0.3,64.3,0.3c-6.6,16.5-2.5,28.8-1.3,31.8c-7.8,8.4-12.5,19.1-12.5,32.2c0,9.9,1.1,18.8,3.9,26.5c-13.2-0.5-34-0.3-54.4,3.8l0.2,0.9c20.4-4.1,41.4-4.2,54.5-3.7c0.6,1.6,1.3,3.2,2,4.7c-13,0.4-35.1,2.1-56.3,8.1l0.3,0.9c21.4-6,43.7-7.6,56.6-8c7.8,14.4,23,23.8,50.2,26.7c-3.9,2.6-7.8,7-9.4,14.5c-5.3,2.5-21.9,8.7-31.9-8.5c0,0-5.6-10.2-16.3-11c0,0-10.4-0.2-0.7,6.5c0,0,6.9,3.3,11.7,15.6c0,0,6.3,21,36.4,14.2V177c0,0-0.6,7.7-7.7,10.2c0,0-4.2,2.9,0.3,4.5c0,0,19.5,1.6,19.5-14.4v-23.6c0,0-0.8-9.4,3.8-12.6v38.8c0,0-0.3,9.3-5.1,12.8c0,0-3.2,5.7,3.8,4.2c0,0,13.4-1.9,14-17.6l0.3-39.3h3.2l0.3,39.3c0.6,15.6,14,17.6,14,17.6c7,1.6,3.8-4.2,3.8-4.2c-4.8-3.5-5.1-12.8-5.1-12.8v-38.5c4.6,3.6,3.8,12.3,3.8,12.3v23.6c0,16,19.5,14.4,19.5,14.4c4.5-1.6,0.3-4.5,0.3-4.5c-7-2.6-7.7-10.2-7.7-10.2v-31c0-12.1-5.1-18.5-10.1-21.8c29-2.9,42.9-12.2,49.3-26.8c12.7,0.3,35.6,1.9,57.4,8.1l0.3-0.9c-21.7-6.1-44.4-7.7-57.3-8.1c0.6-1.5,1.1-3,1.6-4.6C212.9,91.4,234.6,91.4,255.8,95.6L255.8,95.6z M255.8,95.6" /><path fill="#F5CCB3" d="M174.6,63.7c6.2,5.7,9.9,12.5,9.9,19.8c0,34.4-25.6,35.3-57.2,35.3c-31.6,0-57.2-4.8-57.2-35.3c0-7.3,3.6-14.1,9.8-19.7c10.3-9.4,27.7-4.4,47.4-4.4C147,59.4,164.3,54.3,174.6,63.7L174.6,63.7z M174.6,63.7" /><path fill="#FFFFFF" d="M108.3,85.3c0,9.5-5.3,17.1-11.9,17.1c-6.6,0-11.9-7.7-11.9-17.1c0-9.5,5.3-17.1,11.9-17.1C103,68.1,108.3,75.8,108.3,85.3L108.3,85.3z M108.3,85.3" /><path fill="#AF5C51" d="M104.5,85.5c0,6.3-3.6,11.4-7.9,11.4c-4.4,0-7.9-5.1-7.9-11.4c0-6.3,3.6-11.4,7.9-11.4C100.9,74.1,104.5,79.2,104.5,85.5L104.5,85.5z M104.5,85.5" /><path fill="#FFFFFF" d="M172.2,85.3c0,9.5-5.3,17.1-11.9,17.1c-6.6,0-11.9-7.7-11.9-17.1c0-9.5,5.3-17.1,11.9-17.1C166.8,68.1,172.2,75.8,172.2,85.3L172.2,85.3z M172.2,85.3" /><path fill="#AF5C51" d="M168.3,85.5c0,6.3-3.6,11.4-7.9,11.4c-4.4,0-7.9-5.1-7.9-11.4c0-6.3,3.6-11.4,7.9-11.4C164.8,74.1,168.3,79.2,168.3,85.5L168.3,85.5z M168.3,85.5" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#AF5C51" d="M120.6,108c-0.2-0.5,0.1-1,0.6-1.2c0.5-0.2,1,0.1,1.2,0.6c0.8,2.2,2.8,3.6,5.1,3.6c2.3,0,4.3-1.5,5.1-3.6c0.2-0.5,0.7-0.8,1.2-0.6c0.5,0.2,0.8,0.7,0.6,1.2c-1,2.9-3.8,4.9-6.9,4.9C124.4,112.9,121.6,110.9,120.6,108L120.6,108z M120.6,108" /><path fill="#C4E5D9" d="M54.5,121.6c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C53.6,120.2,54.5,120.8,54.5,121.6L54.5,121.6z M54.5,121.6" /><path fill="#C4E5D9" d="M60.3,124.8c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C59.4,123.4,60.3,124,60.3,124.8L60.3,124.8z M60.3,124.8" /><path fill="#C4E5D9" d="M63.8,129c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C62.9,127.5,63.8,128.2,63.8,129L63.8,129z M63.8,129" /><path fill="#C4E5D9" d="M67,133.8c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C66.1,132.3,67,133,67,133.8L67,133.8z M67,133.8" /><path fill="#C4E5D9" d="M70.5,138.2c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C69.6,136.8,70.5,137.4,70.5,138.2L70.5,138.2z M70.5,138.2" /><path fill="#C4E5D9" d="M75.3,142.1c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C74.4,140.6,75.3,141.3,75.3,142.1L75.3,142.1z M75.3,142.1" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#C4E5D9" d="M82,144.6c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C81.1,143.2,82,143.8,82,144.6L82,144.6z M82,144.6" /><path fill="#C4E5D9" d="M88.7,144.6c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C87.8,143.2,88.7,143.8,88.7,144.6L88.7,144.6z M88.7,144.6" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#C4E5D9" d="M95.5,143.5c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C94.5,142.1,95.5,142.7,95.5,143.5L95.5,143.5z M95.5,143.5" />
+                            </g><path fill="#BB86FC" d="M46.9,125.9l-2.1,7.2c0,0-0.5,2.6,1.9,3.1c2.6-0.1,2.4-2.5,2.2-3.2L46.9,125.9L46.9,125.9z M46.9,125.9" /><path fill="#010101" d="M255.8,95.6l0.2-0.9c-21.1-4.2-42.7-4.3-55.8-3.7c2.1-7.7,2.8-16.7,2.8-26.6c0-14.3-5.4-25.7-14-34.3c1.5-4.9,3.5-15.8-2-29.7c0,0-9.8-3.1-32.1,11.8c-8.7-2.2-18-3.3-27.3-3.3c-10.2,0-20.5,1.3-30.2,3.9C74.4-2.9,64.3,0.3,64.3,0.3c-6.6,16.5-2.5,28.8-1.3,31.8c-7.8,8.4-12.5,19.1-12.5,32.2c0,9.9,1.1,18.8,3.9,26.5c-13.2-0.5-34-0.3-54.4,3.8l0.2,0.9c20.4-4.1,41.4-4.2,54.5-3.7c0.6,1.6,1.3,3.2,2,4.7c-13,0.4-35.1,2.1-56.3,8.1l0.3,0.9c21.4-6,43.7-7.6,56.6-8c7.8,14.4,23,23.8,50.2,26.7c-3.9,2.6-7.8,7-9.4,14.5c-5.3,2.5-21.9,8.7-31.9-8.5c0,0-5.6-10.2-16.3-11c0,0-10.4-0.2-0.7,6.5c0,0,6.9,3.3,11.7,15.6c0,0,6.3,21,36.4,14.2V177c0,0-0.6,7.7-7.7,10.2c0,0-4.2,2.9,0.3,4.5c0,0,19.5,1.6,19.5-14.4v-23.6c0,0-0.8-9.4,3.8-12.6v38.8c0,0-0.3,9.3-5.1,12.8c0,0-3.2,5.7,3.8,4.2c0,0,13.4-1.9,14-17.6l0.3-39.3h3.2l0.3,39.3c0.6,15.6,14,17.6,14,17.6c7,1.6,3.8-4.2,3.8-4.2c-4.8-3.5-5.1-12.8-5.1-12.8v-38.5c4.6,3.6,3.8,12.3,3.8,12.3v23.6c0,16,19.5,14.4,19.5,14.4c4.5-1.6,0.3-4.5,0.3-4.5c-7-2.6-7.7-10.2-7.7-10.2v-31c0-12.1-5.1-18.5-10.1-21.8c29-2.9,42.9-12.2,49.3-26.8c12.7,0.3,35.6,1.9,57.4,8.1l0.3-0.9c-21.7-6.1-44.4-7.7-57.3-8.1c0.6-1.5,1.1-3,1.6-4.6C212.9,91.4,234.6,91.4,255.8,95.6L255.8,95.6z M255.8,95.6" /><path fill="#F5CCB3" d="M174.6,63.7c6.2,5.7,9.9,12.5,9.9,19.8c0,34.4-25.6,35.3-57.2,35.3c-31.6,0-57.2-4.8-57.2-35.3c0-7.3,3.6-14.1,9.8-19.7c10.3-9.4,27.7-4.4,47.4-4.4C147,59.4,164.3,54.3,174.6,63.7L174.6,63.7z M174.6,63.7" /><path fill="#FFFFFF" d="M108.3,85.3c0,9.5-5.3,17.1-11.9,17.1c-6.6,0-11.9-7.7-11.9-17.1c0-9.5,5.3-17.1,11.9-17.1C103,68.1,108.3,75.8,108.3,85.3L108.3,85.3z M108.3,85.3" /><path fill="#AF5C51" d="M104.5,85.5c0,6.3-3.6,11.4-7.9,11.4c-4.4,0-7.9-5.1-7.9-11.4c0-6.3,3.6-11.4,7.9-11.4C100.9,74.1,104.5,79.2,104.5,85.5L104.5,85.5z M104.5,85.5" /><path fill="#FFFFFF" d="M172.2,85.3c0,9.5-5.3,17.1-11.9,17.1c-6.6,0-11.9-7.7-11.9-17.1c0-9.5,5.3-17.1,11.9-17.1C166.8,68.1,172.2,75.8,172.2,85.3L172.2,85.3z M172.2,85.3" /><path fill="#AF5C51" d="M168.3,85.5c0,6.3-3.6,11.4-7.9,11.4c-4.4,0-7.9-5.1-7.9-11.4c0-6.3,3.6-11.4,7.9-11.4C164.8,74.1,168.3,79.2,168.3,85.5L168.3,85.5z M168.3,85.5" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#AF5C51" d="M120.6,108c-0.2-0.5,0.1-1,0.6-1.2c0.5-0.2,1,0.1,1.2,0.6c0.8,2.2,2.8,3.6,5.1,3.6c2.3,0,4.3-1.5,5.1-3.6c0.2-0.5,0.7-0.8,1.2-0.6c0.5,0.2,0.8,0.7,0.6,1.2c-1,2.9-3.8,4.9-6.9,4.9C124.4,112.9,121.6,110.9,120.6,108L120.6,108z M120.6,108" /><path fill="#C4E5D9" d="M54.5,121.6c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C53.6,120.2,54.5,120.8,54.5,121.6L54.5,121.6z M54.5,121.6" /><path fill="#C4E5D9" d="M60.3,124.8c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C59.4,123.4,60.3,124,60.3,124.8L60.3,124.8z M60.3,124.8" /><path fill="#C4E5D9" d="M63.8,129c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C62.9,127.5,63.8,128.2,63.8,129L63.8,129z M63.8,129" /><path fill="#C4E5D9" d="M67,133.8c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C66.1,132.3,67,133,67,133.8L67,133.8z M67,133.8" /><path fill="#C4E5D9" d="M70.5,138.2c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C69.6,136.8,70.5,137.4,70.5,138.2L70.5,138.2z M70.5,138.2" /><path fill="#C4E5D9" d="M75.3,142.1c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C74.4,140.6,75.3,141.3,75.3,142.1L75.3,142.1z M75.3,142.1" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#C4E5D9" d="M82,144.6c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C81.1,143.2,82,143.8,82,144.6L82,144.6z M82,144.6" /><path fill="#C4E5D9" d="M88.7,144.6c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C87.8,143.2,88.7,143.8,88.7,144.6L88.7,144.6z M88.7,144.6" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#AF5C51" d="M130.5,100.5c0,1.6-1.3,3-3,3c-1.6,0-3-1.3-3-3s1.3-3,3-3C129.1,97.5,130.5,98.8,130.5,100.5L130.5,100.5z M130.5,100.5" /><path fill="#C4E5D9" d="M95.5,143.5c0,0.8-0.9,1.4-2.1,1.4c-1.1,0-2.1-0.6-2.1-1.4c0-0.8,0.9-1.4,2.1-1.4C94.5,142.1,95.5,142.7,95.5,143.5L95.5,143.5z M95.5,143.5" />
                         </g>
                     </svg>
                 </div>
                 <div class="card-content">
-                    <h3>Github</h3>
+                    <h3>GitHub</h3>
                     <p>194</p>
                 </div>
             </div>
             <div class="account-card" onclick="window.location.href='https://codeforces.com/profile/jugheadjones'">
                 <div class="logo">
-                    <svg fill="#ffffff" width="800px" height="800px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M 3.25,4.75 C 3.664,4.75 4,5.086 4,5.5 l 0,5.25 C 4,11.164 3.664,11.5 3.25,11.5 l -1.5,0 C 1.3365,11.5 1,11.164 1,10.75 L 1,5.5 C 1,5.086 1.3365,4.75 1.75,4.75 l 1.5,0 z M 7.75,2.5 c 0.414,0 0.75,0.336 0.75,0.75 l 0,7.5 c 0,0.414 -0.336,0.75 -0.75,0.75 l -1.5,0 C 5.8365,11.5 5.5,11.164 5.5,10.75 l 0,-7.5 C 5.5,2.836 5.8365,2.5 6.25,2.5 l 1.5,0 z m 4.5,3.75 C 12.664,6.25 13,6.586 13,7 l 0,3.75 c 0,0.414 -0.336,0.75 -0.75,0.75 l -1.5,0 C 10.336,11.5 10,11.164 10,10.75 L 10,7 c 0,-0.414 0.336,-0.75 0.75,-0.75 l 1.5,0 z"/></svg>
+                    <svg fill="#BB86FC" width="800px" height="800px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M 3.25,4.75 C 3.664,4.75 4,5.086 4,5.5 l 0,5.25 C 4,11.164 3.664,11.5 3.25,11.5 l -1.5,0 C 1.3365,11.5 1,11.164 1,10.75 L 1,5.5 C 1,5.086 1.3365,4.75 1.75,4.75 l 1.5,0 z M 7.75,2.5 c 0.414,0 0.75,0.336 0.75,0.75 l 0,7.5 c 0,0.414 -0.336,0.75 -0.75,0.75 l -1.5,0 C 5.8365,11.5 5.5,11.164 5.5,10.75 l 0,-7.5 C 5.5,2.836 5.8365,2.5 6.25,2.5 l 1.5,0 z m 4.5,3.75 C 12.664,6.25 13,6.586 13,7 l 0,3.75 c 0,0.414 -0.336,0.75 -0.75,0.75 l -1.5,0 C 10.336,11.5 10,11.164 10,10.75 L 10,7 c 0,-0.414 0.336,-0.75 0.75,-0.75 l 1.5,0 z"/></svg>
                 </div>
                 <div class="card-content">
                     <h3>Codeforces</h3>
@@ -327,18 +387,12 @@
             <div class="account-card" onclick="window.location.href='https://www.chess.com/stats/overview/jughead_iv/0'">
                 <div class="logo">
                     <svg width="800px" height="800px" viewBox="0 0 50.8 50.8" xmlns="http://www.w3.org/2000/svg" xml:space="preserve">
-
                         <g style="stroke-width:1.00012;stroke-dasharray:none">
-                        
-                        <path d="m29.084 17.202 4.752 3.087c.037 1.357-.699 2.623-.699 2.623H29.09c-.883 6.963 6.255 11.358 6.255 11.358 3.9 3.11 3.385 8.283 3.385 8.283s-.055.867-3.476 1.66c0 0-2.98.96-12.944.69" style="fill:none;stroke:#50C878;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"/>
-                        
-                        <path d="m21.82 17.256-4.72 3.033c-.036 1.357.7 2.623.7 2.623h4.047c.883 6.963-6.255 11.358-6.255 11.358-3.9 3.11-3.385 8.283-3.385 8.283s.055.867 3.476 1.66c0 0 2.979.96 12.944.69" style="fill:none;stroke:#50C878;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"/>
-                        
-                        <path d="M11.13-25.59a6.26 6.352 0 0 1-6.122 4.238A6.26 6.352 0 0 1-.81-26.011a6.26 6.352 0 0 1 2.64-7.027 6.26 6.352 0 0 1 7.397.453" style="fill:none;stroke:#50C878;stroke-width:3.17506;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none" transform="matrix(-.26297 .9648 -.96701 -.25472 0 0)"/>
-                        
+                            <path d="m29.084 17.202 4.752 3.087c.037 1.357-.699 2.623-.699 2.623H29.09c-.883 6.963 6.255 11.358 6.255 11.358 3.9 3.11 3.385 8.283 3.385 8.283s-.055.867-3.476 1.66c0 0-2.98.96-12.944.69" style="fill:none;stroke:#BB86FC;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"/>
+                            <path d="m21.82 17.256-4.72 3.033c-.036 1.357.7 2.623.7 2.623h4.047c.883 6.963-6.255 11.358-6.255 11.358-3.9 3.11-3.385 8.283-3.385 8.283s.055.867 3.476 1.66c0 0 2.979.96 12.944.69" style="fill:none;stroke:#BB86FC;stroke-width:3.175;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"/>
+                            <path d="M11.13-25.59a6.26 6.352 0 0 1-6.122 4.238A6.26 6.352 0 0 1-.81-26.011a6.26 6.352 0 0 1 2.64-7.027 6.26 6.352 0 0 1 7.397.453" style="fill:none;stroke:#BB86FC;stroke-width:3.17506;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none" transform="matrix(-.26297 .9648 -.96701 -.25472 0 0)"/>
                         </g>
-                        
-                        </svg>
+                    </svg>
                 </div>
                 <div class="card-content">
                     <h3>Chess.com</h3>
@@ -347,19 +401,82 @@
             </div>
             <div class="account-card" onclick="window.location.href='https://lichess.org/@/jatin25chess/perf/rapid'">
                 <div class="logo">
-                    <svg width="24px" height="24px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M10.457 6.161a.237.237 0 0 0-.296.165c-.8 2.785 2.819 5.579 5.214 7.428.653.504 1.216.939 1.591 1.292 1.745 1.642 2.564 2.851 2.733 3.178a.24.24 0 0 0 .275.122c.047-.013 4.726-1.3 3.934-4.574a.257.257 0 0 0-.023-.06L18.204 3.407 18.93.295a.24.24 0 0 0-.262-.293c-1.7.201-3.115.435-4.5 1.425-4.844-.323-8.718.9-11.213 3.539C.334 7.737-.246 11.515.085 14.128c.763 5.655 5.191 8.631 9.081 9.532.993.229 1.974.34 2.923.34 3.344 0 6.297-1.381 7.946-3.85a.24.24 0 0 0-.372-.3c-3.411 3.527-9.002 4.134-13.296 1.444-4.485-2.81-6.202-8.41-3.91-12.749C4.741 4.221 8.801 2.362 13.888 3.31c.056.01.115 0 .165-.029l.335-.197c.926-.546 1.961-1.157 2.873-1.279l-.694 1.993a.243.243 0 0 0 .02.202l6.082 10.192c-.193 2.028-1.706 2.506-2.226 2.611-.287-.645-.814-1.364-2.306-2.803-.422-.407-1.21-.941-2.124-1.56-2.364-1.601-5.937-4.02-5.391-5.984a.239.239 0 0 0-.165-.295z"style="fill:none;stroke:#ffffff"/></svg>
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg"><path d="M10.457 6.161a.237.237 0 0 0-.296.165c-.8 2.785 2.819 5.579 5.214 7.428.653.504 1.216.939 1.591 1.292 1.745 1.642 2.564 2.851 2.733 3.178a.24.24 0 0 0 .275.122c.047-.013 4.726-1.3 3.934-4.574a.257.257 0 0 0-.023-.06L18.204 3.407 18.93.295a.24.24 0 0 0-.262-.293c-1.7.201-3.115.435-4.5 1.425-4.844-.323-8.718.9-11.213 3.539C.334 7.737-.246 11.515.085 14.128c.763 5.655 5.191 8.631 9.081 9.532.993.229 1.974.34 2.923.34 3.344 0 6.297-1.381 7.946-3.85a.24.24 0 0 0-.372-.3c-3.411 3.527-9.002 4.134-13.296 1.444-4.485-2.81-6.202-8.41-3.91-12.749C4.741 4.221 8.801 2.362 13.888 3.31c.056.01.115 0 .165-.029l.335-.197c.926-.546 1.961-1.157 2.873-1.279l-.694 1.993a.243.243 0 0 0 .02.202l6.082 10.192c-.193 2.028-1.706 2.506-2.226 2.611-.287-.645-.814-1.364-2.306-2.803-.422-.407-1.21-.941-2.124-1.56-2.364-1.601-5.937-4.02-5.391-5.984a.239.239 0 0 0-.165-.295z" style="fill:none;stroke:#BB86FC"/></svg>
                 </div>
                 <div class="card-content">
                     <h3>Lichess</h3>
                     <p>2068</p>
                 </div>
             </div>
-            <!-- Add more account cards as needed -->
             <div id="game-link"></div>
         </section>
     </div>
 
     <script>
+        // Particle Animation
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particlesArray = [];
+        const numberOfParticles = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.2) this.size -= 0.01;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(187, 134, 252, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                if (particlesArray[i].size <= 0.2) {
+                    particlesArray.splice(i, 1);
+                    particlesArray.push(new Particle());
+                    i--;
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Lichess Game Fetch
         fetch('https://lichess.org/api/games/user/bot-whiteworm?max=1', {
             headers: {
                 'Accept': 'application/x-ndjson'
@@ -368,7 +485,6 @@
         .then(response => response.text())
         .then(data => {
             const gameData = JSON.parse(data);
-            console.log(gameData)
             const gameId = gameData.id;
             
             const gameLinkDiv = document.getElementById('game-link');
@@ -392,6 +508,7 @@
             gameLinkDiv.innerHTML = '<p>Unable to load latest game at this time.</p>';
         });
 
+        // Smooth Scroll
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
