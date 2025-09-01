@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jatin Gaur - Computer Science Student</title>
+    <title>Jatin Gaur - Electronics and Communication Student</title>
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <style>
         * {
             margin: 0;
@@ -175,7 +176,7 @@
         }
 
         .account-card {
-            background: #111111;
+            background: #000000;
             padding: 1.5rem;
             border-radius: 8px;
             border: 1px solid #1a1a1a;
@@ -225,9 +226,70 @@
             color: #ffffff;
         }
 
+        /* Skills Section */
+        .skills-section {
+            padding: 3rem 0;
+            background: #050505;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .skills-container {
+            width: 100%;
+            height: 80px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(90deg, #0a0a0a 0%, transparent 10%, transparent 90%, #0a0a0a 100%);
+        }
+
+        .skills-track {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            animation: scroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .skill-item {
+            background: #111111;
+            color: #ffffff;
+            padding: 10px 16px;
+            margin: 0 8px;
+            border-radius: 20px;
+            border: 1px solid #1a1a1a;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: inline-block;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: #1a1a1a;
+            border-color: #333;
+            transform: translateY(-2px);
+        }
+        i {
+            padding-right: 10px;
+            height: 100%;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Pause animation on hover */
+        .skills-container:hover .skills-track {
+            animation-play-state: paused;
+        }
+
         /* Experience */
         .experience-item {
-            background: #111111;
+            background: #000000;
             padding: 2rem;
             border-radius: 8px;
             border: 1px solid #1a1a1a;
@@ -265,8 +327,9 @@
         }
 
         .project-card {
-            background: #111111;
+            background: #000000;
             padding: 2rem;
+            height: 100%;
             border-radius: 8px;
             border: 1px solid #1a1a1a;
             transition: all 0.3s ease;
@@ -382,6 +445,12 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .skill-item {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+                margin: 0 6px;
+            }
         }
 
         /* Smooth scrolling */
@@ -432,21 +501,60 @@
                     Final Year B.Tech student at IIIT Naya Raipur, exploring Computer Science with projects in Web Development and Machine Learning. Also into Competitive Programming and chess.
                 </p>
                 <div class="hero-actions">
-                    <a href="https://drive.google.com/file/d/1tObzNv32gG7ML-NJR54gHa1q-v6SqLG9/view" 
+                    <a href="https://drive.google.com/file/d/1J8aSMR45Dtth6kVPUkmQi8Fdw4aKIr7A/view" 
                        target="_blank" 
                        class="resume-link">View Resume</a>
                     <a href="https://github.com/jatingaur18" 
-                       target="_blank" 
-                       class="github-link"
-                       title="GitHub Profile">
-                        <svg class="github-icon" viewBox="0 0 24 24">
-                            <path d="M12 0.296997C5.37 0.296997 0 5.67 0 12.297C0 17.6 3.438 22.097 8.207 23.682C8.806 23.795 9.025 23.424 9.025 23.105C9.025 22.820 9.015 22.065 9.010 21.065C5.672 21.789 4.968 19.455 4.968 19.455C4.422 18.07 3.633 17.7 3.633 17.7C2.546 16.956 3.717 16.971 3.717 16.971C4.922 17.055 5.555 18.207 5.555 18.207C6.625 20.042 8.364 19.512 9.05 19.205C9.158 18.429 9.467 17.9 9.81 17.6C7.145 17.3 4.344 16.268 4.344 11.67C4.344 10.36 4.809 9.29 5.579 8.45C5.444 8.147 5.039 6.927 5.684 5.274C5.684 5.274 6.689 4.952 8.984 6.504C9.944 6.237 10.964 6.105 11.984 6.099C13.004 6.105 14.024 6.237 14.984 6.504C17.264 4.952 18.269 5.274 18.269 5.274C18.914 6.927 18.509 8.147 18.389 8.45C19.154 9.29 19.619 10.36 19.619 11.67C19.619 16.28 16.814 17.295 14.144 17.59C14.564 17.950 14.954 18.686 14.954 19.81C14.954 21.416 14.939 22.706 14.939 23.096C14.939 23.411 15.149 23.786 15.764 23.666C20.565 22.092 24 17.592 24 12.297C24 5.67 18.627 0.296997 12 0.296997Z"/>
+                    target="_blank" 
+                    class="github-link"
+                    title="GitHub Profile">
+                    <svg class="github-icon" viewBox="0 0 24 24">
+                        <path d="M12 0.296997C5.37 0.296997 0 5.67 0 12.297C0 17.6 3.438 22.097 8.207 23.682C8.806 23.795 9.025 23.424 9.025 23.105C9.025 22.820 9.015 22.065 9.010 21.065C5.672 21.789 4.968 19.455 4.968 19.455C4.422 18.07 3.633 17.7 3.633 17.7C2.546 16.956 3.717 16.971 3.717 16.971C4.922 17.055 5.555 18.207 5.555 18.207C6.625 20.042 8.364 19.512 9.05 19.205C9.158 18.429 9.467 17.9 9.81 17.6C7.145 17.3 4.344 16.268 4.344 11.67C4.344 10.36 4.809 9.29 5.579 8.45C5.444 8.147 5.039 6.927 5.684 5.274C5.684 5.274 6.689 4.952 8.984 6.504C9.944 6.237 10.964 6.105 11.984 6.099C13.004 6.105 14.024 6.237 14.984 6.504C17.264 4.952 18.269 5.274 18.269 5.274C18.914 6.927 18.509 8.147 18.389 8.45C19.154 9.29 19.619 10.36 19.619 11.67C19.619 16.28 16.814 17.295 14.144 17.59C14.564 17.950 14.954 18.686 14.954 19.81C14.954 21.416 14.939 22.706 14.939 23.096C14.939 23.411 15.149 23.786 15.764 23.666C20.565 22.092 24 17.592 24 12.297C24 5.67 18.627 0.296997 12 0.296997Z"/>
                         </svg>
                     </a>
                 </div>
             </div>
         </section>
-
+        
+        <!-- Skills Section -->
+        <section class="skills-section" id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-container">
+                    <div class="skills-track">
+                        <span class="skill-item"><i class="devicon-cplusplus-plain"></i>C++</span>
+                        <span class="skill-item"><i class="devicon-javascript-plain"></i>JavaScript</span>
+                        <span class="skill-item"><i class="devicon-typescript-plain"></i>TypeScript</span>
+                        <span class="skill-item"><i class="devicon-react-original"></i>React</span>
+                        <span class="skill-item"><i class="devicon-react-original"></i>React</span>
+                        <span class="skill-item"><i class="devicon-docker-plain"></i>Docker</span>
+                        <span class="skill-item"><i class="devicon-git-plain"></i>Git</span>
+                        <span class="skill-item"><i class="devicon-github-original"></i>GitHub</span>
+                        <span class="skill-item">CI/CD</span>
+                        <span class="skill-item"><i class="devicon-redis-plain"></i>Redis</span>
+                        <span class="skill-item"><i class="devicon-python-plain"></i>Python</span>
+                        <span class="skill-item"><i class="devicon-flask-plain"></i>Flask</span>
+                        <span class="skill-item"><i class="devicon-mongodb-plain"></i>MongoDB</span>
+                        <span class="skill-item"><i class="devicon-sql-plain"></i>SQL</span>
+                        <!-- Duplicate for seamless loop -->
+                        <span class="skill-item"><i class="devicon-cplusplus-plain"></i>C++</span>
+                        <span class="skill-item"><i class="devicon-javascript-plain"></i>JavaScript</span>
+                        <span class="skill-item"><i class="devicon-typescript-plain"></i>TypeScript</span>
+                        <span class="skill-item"><i class="devicon-react-original"></i>React</span>
+                        <span class="skill-item"><i class="devicon-docker-plain"></i>Docker</span>
+                        <span class="skill-item"><i class="devicon-git-plain"></i>Git</span>
+                        <span class="skill-item"><i class="devicon-github-original"></i>GitHub</span>
+                        <span class="skill-item">CI/CD</span>
+                        <span class="skill-item"><i class="devicon-redis-plain"></i>Redis</span>
+                        <span class="skill-item"><i class="devicon-python-plain"></i>Python</span>
+                        <span class="skill-item"><i class="devicon-flask-plain"></i>Flask</span>
+                        <span class="skill-item"><i class="devicon-mongodb-plain"></i>MongoDB</span>
+                        <span class="skill-item"><i class="devicon-sql-plain"></i>SQL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- Competitive Programming Section -->
         <section class="section" id="competitive">
             <div class="container">
@@ -510,6 +618,20 @@
                 </div>
             </div>
         </section>
+        <!-- Open Source Contributions Section -->
+        <section class="section" id="open-source">
+            <div class="container">
+                <h2 class="section-title">Open Source Contributions</h2>
+                <div class="experience-item">
+                    <h3>SymPy</h3>
+                    <p class="company">Python, Mathematics, Algorithms | May 2025</p>
+                    <p class="description">
+                        Contributed to SymPy by resolving issues related to continuum mechanics and symbolic integration 
+                        within the beam analysis and limit evaluation modules.
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <!-- Projects Section -->
         <section class="section" id="projects">
@@ -546,6 +668,20 @@
                             View on GitHub →
                         </a>
                     </div>
+
+                    <div class="project-card">
+                        <h3>Carbon-Credits</h3>
+                        <p class="subtitle">Ethereum, Sepolia API, Hardhat, Ethers.js, PostgreSQL | February 2024</p>
+                        <p class="description">
+                            Developed a decentralized Carbon Credit trading platform. Integrated a royalty mechanism ensuring 
+                            10% of transaction value is returned to NGOs. Built a decentralized carbon market web interface, issuing 
+                            100% verifiable proof certificates for proof of purchase.
+                        </p>
+                        <a href="https://github.com/jatingaur18" target="_blank">
+                            View on GitHub →
+                        </a>
+                    </div>
+
                     <div class="project-card">
                         <h3>Premier League Prediction</h3>
                         <p class="subtitle">Football Performance Prediction Model</p>
@@ -553,6 +689,17 @@
                             Developed a performance prediction model for football players using scraped match data, leveraging machine learning algorithms like Random Forest, XGBoost, and GBR to forecast stats against specific opponents.
                         </p>
                         <a href="https://github.com/jatingaur18/Hack-a-sol" target="_blank">
+                            View on GitHub →
+                        </a>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>View more Projects</h3>
+                        <p class="subtitle">Explore my other projects on GitHub</p>
+                        <p class="description">
+                            I have worked on various projects ranging from web development to machine learning. Check them out!
+                        </p>
+                        <a href="https://github.com/jatingaur18" target="_blank">
                             View on GitHub →
                         </a>
                     </div>
