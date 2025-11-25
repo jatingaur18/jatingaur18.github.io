@@ -1,984 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jatin Gaur - Electronics and Communication Student</title>
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <title>Jatin Gaur | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        chess: {
+                            bg: '#161512',      // Lichess-style dark background
+                            card: '#262421',    // Slightly lighter card
+                            light: '#babebb',   // Text gray
+                            white: '#ffffff',
+                            accent: '#769656',  // Standard Tournament Board Green
+                            accentHover: '#5d7a42',
+                            danger: '#ca3431'   // Red for "busy" etc
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-color: #161512;
+            color: #babebb;
+            /* Subtle checkered texture */
+            background-image:
+                linear-gradient(45deg, #1a1916 25%, transparent 25%),
+                linear-gradient(-45deg, #1a1916 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #1a1916 75%),
+                linear-gradient(-45deg, transparent 75%, #1a1916 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #ffffff;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #b0b0b0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 400;
-        }
-
-        .nav-links a:hover {
-            color: #ffffff;
-        }
-
-        /* Main Content */
-        main {
-            margin-top: 80px;
-        }
-
-        .section {
-            padding: 4rem 0;
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        .section:last-child {
-            border-bottom: none;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 6rem 0;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: #888;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .hero .description {
-            font-size: 1.1rem;
-            color: #b0b0b0;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            line-height: 1.7;
-        }
-
-        .hero-actions {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .resume-link {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #1a1a1a;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 6px;
-            border: 1px solid #333;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .resume-link:hover {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-
-        .github-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            background: #1a1a1a;
-            border-radius: 6px;
-            border: 1px solid #333;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .github-link:hover {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-
-        .github-icon {
-            width: 24px;
-            height: 24px;
-            fill: #ffffff;
-        }
-
-        /* Sections */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        /* Competitive Programming */
-        .accounts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .account-card {
-            background: #000000;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #1a1a1a;
-            transition: all 0.3s ease;
+        .bento-card {
+            background-color: #262421;
+            border-radius: 0.75rem;
+            transition: all 0.2s ease;
             position: relative;
-        }
-
-        .account-card:hover {
-            border-color: #333;
-            background: #151515;
-        }
-
-        .account-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .platform-logo {
-            width: 28px;
-            height: 28px;
-            border-radius: 4px;
-            object-fit: cover;
-        }
-
-        .account-card h3 {
-            color: #ffffff;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .account-card .rating {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .account-card a {
-            color: #b0b0b0;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .account-card a:hover {
-            color: #ffffff;
-        }
-
-        /* Skills Section */
-        .skills-section {
-            padding: 3rem 0;
-            background: #050505;
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        .skills-container {
-            width: 100%;
-            height: 80px;
             overflow: hidden;
-            position: relative;
-            background: linear-gradient(90deg, #0a0a0a 0%, transparent 10%, transparent 90%, #0a0a0a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .skills-track {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            animation: scroll 30s linear infinite;
-            white-space: nowrap;
-        }
-
-        .skill-item {
-            background: #111111;
-            color: #ffffff;
-            padding: 10px 16px;
-            margin: 0 8px;
-            border-radius: 20px;
-            border: 1px solid #1a1a1a;
-            font-size: 1.2rem;
-            font-weight: 500;
-            display: inline-block;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            background: #1a1a1a;
-            border-color: #333;
+        .bento-card:hover {
             transform: translateY(-2px);
-        }
-        i {
-            padding-right: 10px;
-            height: 100%;
+            border-color: #769656;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Pause animation on hover */
-        .skills-container:hover .skills-track {
-            animation-play-state: paused;
-        }
-
-        /* Experience */
-        .experience-item {
-            background: #000000;
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid #1a1a1a;
-        }
-
-        .experience-item h3 {
-            color: #ffffff;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-item .company {
-            color: #888;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-item .date {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .experience-item .description {
-            color: #b0b0b0;
-            line-height: 1.6;
-        }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: #000000;
-            padding: 2rem;
-            height: 100%;
-            border-radius: 8px;
-            border: 1px solid #1a1a1a;
-            transition: all 0.3s ease;
-            height: fit-content;
-        }
-
-        .project-card:hover {
-            border-color: #333;
-            background: #151515;
-        }
-
-        .project-card h3 {
-            color: #ffffff;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card .subtitle {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .project-card .description {
-            color: #b0b0b0;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .project-card a {
-            color: #888;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .project-card a:hover {
-            color: #ffffff;
-        }
-
-        /* Chess Bot Section */
-        .chess-bot {
-            text-align: center;
-        }
-
-        .chess-container {
-            max-width: 500px;
-            margin: 1rem auto;
-            background: #111111;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #1a1a1a;
-        }
-
-        .chess-iframe {
-            width: 100%;
-            height: 400px;
-            border: none;
-        }
-
-        .bot-info {
-            padding: 1rem;
-            background: #0f0f0f;
-        }
-
-        .bot-info a {
-            color: #b0b0b0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .bot-info a:hover {
-            color: #ffffff;
-        }
-
-        /* Footer */
-        footer {
-            background: #050505;
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid #1a1a1a;
-        }
-
-        footer p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .accounts-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .skill-item {
-                font-size: 0.8rem;
-                padding: 6px 12px;
-                margin: 0 6px;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
+        /* Compact Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #0a0a0a;
+            background: #161512;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
+            background: #3c3a36;
+            border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #444;
+            background: #769656;
+        }
+
+        /* Text utilities */
+        .text-xxs {
+            font-size: 0.65rem;
         }
     </style>
 </head>
-<body>
-    <header>
-        <nav class="container">
-            <div class="logo">Jatin Gaur</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#competitive">Competitive Programming</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#chess">Chess Bot</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero section" id="about">
-            <div class="container">
-                <h1>Jatin Gaur</h1>
-                <p class="subtitle">Electronics and Communication Student</p>
-                <p class="description">
-                    Final Year B.Tech student at IIIT Naya Raipur, exploring Computer Science with projects in Web Development and Machine Learning. Also into Competitive Programming and chess.
+<body class="min-h-screen p-4 flex justify-center items-start pt-10 pb-10">
+
+    <!-- Grid: 1 col mobile, 2 col tablet, 4 col desktop -->
+    <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-[minmax(100px,auto)]">
+
+        <!-- 1. PROFILE / HERO (2x2) -->
+        <div class="bento-card col-span-1 md:col-span-2 row-span-2 p-6 flex flex-col justify-between relative">
+            <div class="absolute top-4 right-4 text-chess-accent opacity-20">
+                <i class="fa-solid fa-chess-king text-6xl"></i>
+            </div>
+
+            <div class="z-10">
+                <div class="flex items-center gap-2 mb-3">
+                    <img src="https://ui-avatars.com/api/?name=Jatin+Gaur&background=769656&color=fff"
+                        class="w-10 h-10 rounded-lg shadow-md" alt="Avatar">
+                    <div>
+                        <h1 class="text-2xl font-bold font-display text-chess-white leading-tight">Jatin Gaur</h1>
+                        <p class="text-xs text-chess-accent font-mono">IIIT Naya Raipur</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400 leading-snug max-w-sm mb-4">
+                    Electronics & Communication Student. Exploring CS, Web Dev, ML & High-Performance Computing.
                 </p>
-                <div class="hero-actions">
-                    <a href="https://drive.google.com/file/d/1J8aSMR45Dtth6kVPUkmQi8Fdw4aKIr7A/view" 
-                       target="_blank" 
-                       class="resume-link">View Resume</a>
-                    <a href="https://github.com/jatingaur18" 
-                    target="_blank" 
-                    class="github-link"
-                    title="GitHub Profile">
-                    <svg class="github-icon" viewBox="0 0 24 24">
-                        <path d="M12 0.296997C5.37 0.296997 0 5.67 0 12.297C0 17.6 3.438 22.097 8.207 23.682C8.806 23.795 9.025 23.424 9.025 23.105C9.025 22.820 9.015 22.065 9.010 21.065C5.672 21.789 4.968 19.455 4.968 19.455C4.422 18.07 3.633 17.7 3.633 17.7C2.546 16.956 3.717 16.971 3.717 16.971C4.922 17.055 5.555 18.207 5.555 18.207C6.625 20.042 8.364 19.512 9.05 19.205C9.158 18.429 9.467 17.9 9.81 17.6C7.145 17.3 4.344 16.268 4.344 11.67C4.344 10.36 4.809 9.29 5.579 8.45C5.444 8.147 5.039 6.927 5.684 5.274C5.684 5.274 6.689 4.952 8.984 6.504C9.944 6.237 10.964 6.105 11.984 6.099C13.004 6.105 14.024 6.237 14.984 6.504C17.264 4.952 18.269 5.274 18.269 5.274C18.914 6.927 18.509 8.147 18.389 8.45C19.154 9.29 19.619 10.36 19.619 11.67C19.619 16.28 16.814 17.295 14.144 17.59C14.564 17.950 14.954 18.686 14.954 19.81C14.954 21.416 14.939 22.706 14.939 23.096C14.939 23.411 15.149 23.786 15.764 23.666C20.565 22.092 24 17.592 24 12.297C24 5.67 18.627 0.296997 12 0.296997Z"/>
-                        </svg>
+                <div class="flex gap-2">
+                    <a href="https://github.com/jatingaur18" target="_blank"
+                        class="px-4 py-2 bg-black/30 hover:bg-chess-accent text-white text-xs font-bold rounded transition-colors flex items-center gap-2 border border-white/5">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nmxWa5QQkljI5IwLO1XnhNxj16UMOQSP/view?usp=sharing"
+                        target="_blank"
+                        class="px-4 py-2 bg-chess-accent hover:bg-chess-accentHover text-white text-xs font-bold rounded transition-colors flex items-center gap-2 shadow-lg shadow-chess-accent/20">
+                        <i class="fa-solid fa-file-pdf"></i> Resume
                     </a>
                 </div>
             </div>
-        </section>
-        
-        <!-- Skills Section -->
-        <section class="skills-section" id="skills">
-            <div class="container">
-                <h2 class="section-title">Skills</h2>
-                <div class="skills-container">
-                    <div class="skills-track">
-                        <span class="skill-item"><i class="devicon-cplusplus-plain"></i>C++</span>
-                        <span class="skill-item"><i class="devicon-javascript-plain"></i>JavaScript</span>
-                        <span class="skill-item"><i class="devicon-typescript-plain"></i>TypeScript</span>
-                        <span class="skill-item"><i class="devicon-react-original"></i>React</span>
-                        <span class="skill-item"><i class="devicon-react-original"></i>React</span>
-                        <span class="skill-item"><i class="devicon-docker-plain"></i>Docker</span>
-                        <span class="skill-item"><i class="devicon-git-plain"></i>Git</span>
-                        <span class="skill-item"><i class="devicon-github-original"></i>GitHub</span>
-                        <span class="skill-item">CI/CD</span>
-                        <span class="skill-item"><i class="devicon-redis-plain"></i>Redis</span>
-                        <span class="skill-item"><i class="devicon-python-plain"></i>Python</span>
-                        <span class="skill-item"><i class="devicon-flask-plain"></i>Flask</span>
-                        <span class="skill-item"><i class="devicon-mongodb-plain"></i>MongoDB</span>
-                        <span class="skill-item"><i class="devicon-sql-plain"></i>SQL</span>
-                        <!-- Duplicate for seamless loop -->
-                        <span class="skill-item"><i class="devicon-cplusplus-plain"></i>C++</span>
-                        <span class="skill-item"><i class="devicon-javascript-plain"></i>JavaScript</span>
-                        <span class="skill-item"><i class="devicon-typescript-plain"></i>TypeScript</span>
-                        <span class="skill-item"><i class="devicon-react-original"></i>React</span>
-                        <span class="skill-item"><i class="devicon-docker-plain"></i>Docker</span>
-                        <span class="skill-item"><i class="devicon-git-plain"></i>Git</span>
-                        <span class="skill-item"><i class="devicon-github-original"></i>GitHub</span>
-                        <span class="skill-item">CI/CD</span>
-                        <span class="skill-item"><i class="devicon-redis-plain"></i>Redis</span>
-                        <span class="skill-item"><i class="devicon-python-plain"></i>Python</span>
-                        <span class="skill-item"><i class="devicon-flask-plain"></i>Flask</span>
-                        <span class="skill-item"><i class="devicon-mongodb-plain"></i>MongoDB</span>
-                        <span class="skill-item"><i class="devicon-sql-plain"></i>SQL</span>
-                    </div>
-                </div>
+
+            <!-- Walking Animation Footer Strip inside Hero (PRESERVED) -->
+            <div class="absolute bottom-0 left-0 w-full h-8 bg-black/20 border-t border-white/5 overflow-hidden">
+                <canvas id="miniCanvas" class="w-full h-full opacity-50"></canvas>
             </div>
-        </section>
-        
-        <!-- Competitive Programming Section -->
-        <section class="section" id="competitive">
-            <div class="container">
-                <h2 class="section-title">Competitive Programming</h2>
-                <div class="accounts-grid">
-                    <div class="account-card">
-                        <div class="account-header">
-                            <img src="https://codeforces.org/s/0/favicon-96x96.png" alt="Codeforces" class="platform-logo">
-                            <h3>Codeforces</h3>
-                        </div>
-                        <p class="rating">Rating: 1489</p>
-                        <a href="https://codeforces.com/profile/jugheadjones" target="_blank">
-                            View Profile →
-                        </a>
-                    </div>
-                    <div class="account-card">
-                        <div class="account-header">
-                            <img src="https://leetcode.com/favicon.ico" alt="LeetCode" class="platform-logo">
-                            <h3>LeetCode</h3>
-                        </div>
-                        <p class="rating">Rating: 1864</p>
-                        <a href="https://leetcode.com/jatingaur18" target="_blank">
-                            View Profile →
-                        </a>
-                    </div>
-                    <div class="account-card">
-                        <div class="account-header">
-                            <img src="https://www.chess.com/favicon.ico" alt="Chess.com" class="platform-logo">
-                            <h3>Chess.com</h3>
-                        </div>
-                        <p class="rating">Rating: 1630</p>
-                        <a href="https://www.chess.com/stats/overview/jughead_iv/0" target="_blank">
-                            View Profile →
-                        </a>
-                    </div>
-                    <div class="account-card">
-                        <div class="account-header">
-                            <img src="https://lichess1.org/assets/_Qw1VCT/logo/lichess-favicon-32.png" alt="Lichess" class="platform-logo">
-                            <h3>Lichess</h3>
-                        </div>
-                        <p class="rating">Rating: 2068</p>
-                        <a href="https://lichess.org/@/jatin25chess/perf/rapid" target="_blank">
-                            View Profile →
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section class="section" id="experience">
-            <div class="container">
-                <h2 class="section-title">Experience</h2>
-                <div class="experience-item">
-                    <h3>Research and Development Intern</h3>
-                    <p class="company">Samsung</p>
-                    <p class="date">Sept 2024 - Present</p>
-                    <p class="description">
-                        Automated the process of generating Gazebo world with 100+ unique objects integration and physics simulation by designing an optimal Python script to convert JSON to .world file.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <!-- Open Source Contributions Section -->
-        <section class="section" id="open-source">
-            <div class="container">
-                <h2 class="section-title">Open Source Contributions</h2>
-                <div class="experience-item">
-                    <h3>SymPy</h3>
-                    <p class="company">Python, Mathematics, Algorithms | May 2025</p>
-                    <p class="description">
-                        Contributed to SymPy by resolving issues related to continuum mechanics and symbolic integration 
-                        within the beam analysis and limit evaluation modules.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section class="section" id="projects">
-            <div class="container">
-                <h2 class="section-title">Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>Chess Engine</h3>
-                        <p class="subtitle">High-Performance Chess AI</p>
-                        <p class="description">
-                            Developed a high-performance chess engine using bitboards, achieving real-time move generation and search optimization. The engine powers a 1700–1800 rated bot on Lichess, handling 50K+ nodes/sec with advanced pruning and parallelism.
-                        </p>
-                        <a href="https://github.com/jatingaur18/Chess-Engine" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-                    <div class="project-card">
-                        <h3>JobQuest</h3>
-                        <p class="subtitle">AI-Powered Job Application Tracker</p>
-                        <p class="description">
-                            Designed a web application for tracking job applications, generating skill tests based on job descriptions using AI, and improving applicant screening efficiency by 40%.
-                        </p>
-                        <a href="https://github.com/jatingaur18/JobQuest" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-                    <div class="project-card">
-                        <h3>Load Balancer</h3>
-                        <p class="subtitle">Multi-threaded Network Load Balancer</p>
-                        <p class="description">
-                            A multi-threaded, event-based load balancer written from scratch in C++ using socket API. Uses thread pooling and a basic implementation of event loop using epoll to select readable and writable file descriptors.
-                        </p>
-                        <a href="https://github.com/jatingaur18/lb" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-
-                    <div class="project-card">
-                        <h3>Carbon-Credits</h3>
-                        <p class="subtitle">Ethereum, Sepolia API, Hardhat, Ethers.js, PostgreSQL | February 2024</p>
-                        <p class="description">
-                            Developed a decentralized Carbon Credit trading platform. Integrated a royalty mechanism ensuring 
-                            10% of transaction value is returned to NGOs. Built a decentralized carbon market web interface, issuing 
-                            100% verifiable proof certificates for proof of purchase.
-                        </p>
-                        <a href="https://github.com/jatingaur18" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-
-                    <div class="project-card">
-                        <h3>Premier League Prediction</h3>
-                        <p class="subtitle">Football Performance Prediction Model</p>
-                        <p class="description">
-                            Developed a performance prediction model for football players using scraped match data, leveraging machine learning algorithms like Random Forest, XGBoost, and GBR to forecast stats against specific opponents.
-                        </p>
-                        <a href="https://github.com/jatingaur18/Hack-a-sol" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-
-                    <div class="project-card">
-                        <h3>View more Projects</h3>
-                        <p class="subtitle">Explore my other projects on GitHub</p>
-                        <p class="description">
-                            I have worked on various projects ranging from web development to machine learning. Check them out!
-                        </p>
-                        <a href="https://github.com/jatingaur18" target="_blank">
-                            View on GitHub →
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Chess Bot Section -->
-        <section class="section chess-bot" id="chess">
-            <div class="container">
-                <h2 class="section-title">Chess Bot</h2>
-                <p style="color: #b0b0b0; margin-bottom: 2rem;">
-                    Watch my chess engine in action on Lichess
-                </p>
-                <div class="chess-container">
-                    <div id="game-container">
-                        <p style="color: #888; padding: 1rem;">Loading latest game...</p>
-                    </div>
-                    <div class="bot-info">
-                        <a href="https://lichess.org/@/bot-whiteworm" target="_blank">
-                            View bot profile on Lichess →
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Walking People Animation -->
-    <section style="position: relative; height: 330px; overflow: hidden; background: #050505; border-top: 1px solid #1a1a1a;">
-        <canvas id="canvas" style="width: 100%; height: 100%; display: block;"></canvas>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Jatin Gaur. All rights reserved.</p>
         </div>
-    </footer>
 
-    <!-- GSAP CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        <!-- 2. SKILLS (2x1) -->
+        <div class="bento-card col-span-1 md:col-span-2 p-5 flex flex-col justify-center">
+            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-bolt text-chess-accent"></i> Arsenal
+            </h3>
+            <div class="flex flex-wrap gap-1.5">
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">C++</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">JS/TS</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">React</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">Python</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">Docker</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">Git</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">Redis</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">Flask</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">MongoDB</span>
+                <span class="px-2 py-1 bg-white/5 text-chess-white text-xs rounded border border-white/5">SQL</span>
+            </div>
+        </div>
 
-        // Load chess game
-        async function loadChessGame() {
-            try {
-                const response = await fetch('https://lichess.org/api/games/user/bot-whiteworm?max=1', {
-                    headers: {
-                        'Accept': 'application/x-ndjson'
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Failed to fetch game data');
-                }
-                
-                const data = await response.text();
-                const gameData = JSON.parse(data);
-                const gameId = gameData.id;
-                
-                const gameContainer = document.getElementById('game-container');
-                gameContainer.innerHTML = `
-                    <iframe 
-                        src="https://lichess.org/embed/${gameId}?theme=brown&bg=dark"
-                        class="chess-iframe"
-                        frameborder="0"
-                        allowtransparency="true">
-                    </iframe>
-                `;
-            } catch (error) {
-                console.error('Error loading chess game:', error);
-                const gameContainer = document.getElementById('game-container');
-                gameContainer.innerHTML = `
-                    <p style="color: #888; padding: 1rem;">
-                        Unable to load latest game. 
-                        <a href="https://lichess.org/@/bot-whiteworm" target="_blank" style="color: #b0b0b0;">
-                            View bot profile on Lichess →
-                        </a>
+        <!-- 3. CP & CHESS STATS (Mix of 1x1) -->
+        <!-- Codeforces -->
+        <a href="https://codeforces.com/profile/jugheadjones" target="_blank"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#1f2f3d] transition-colors group">
+            <div class="flex justify-between items-start">
+                <i class="fa-solid fa-chart-simple text-gray-500 group-hover:text-blue-400"></i>
+                <span class="text-xxs font-mono text-gray-500">CF</span>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-white group-hover:text-blue-400">1489</div>
+                <div class="text-xs text-gray-400">Specialist</div>
+            </div>
+        </a>
+
+        <!-- LeetCode -->
+        <a href="https://leetcode.com/jatingaur18" target="_blank"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#2c2618] transition-colors group">
+            <div class="flex justify-between items-start">
+                <i class="fa-solid fa-code text-gray-500 group-hover:text-yellow-500"></i>
+                <span class="text-xxs font-mono text-gray-500">LC</span>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-white group-hover:text-yellow-500">1864</div>
+                <div class="text-xs text-gray-400">Knight</div>
+            </div>
+        </a>
+
+        <!-- Experience (2x2) -->
+        <div class="bento-card col-span-1 md:col-span-2 row-span-2 p-5 overflow-y-auto">
+            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-briefcase text-chess-accent"></i> Experience
+            </h3>
+
+            <div class="relative pl-4 border-l border-white/10 space-y-6">
+                <!-- Item 1 -->
+                <div class="relative">
+                    <div
+                        class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-chess-accent border-2 border-chess-card">
+                    </div>
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h4 class="text-sm font-bold text-white">Samsung R&D</h4>
+                        <span
+                            class="text-xxs font-mono text-chess-accent bg-chess-accent/10 px-1.5 py-0.5 rounded">Internship</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mb-1">Research Intern • Sept 2024</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        Automated Gazebo world generation (100+ objects) using Python scripts to convert JSON to .world
+                        format.
                     </p>
-                `;
+                </div>
+                <!-- Item 2 -->
+                <div class="relative">
+                    <div
+                        class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-gray-600 border-2 border-chess-card">
+                    </div>
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h4 class="text-sm font-bold text-white">SymPy</h4>
+                        <span class="text-xxs font-mono text-chess-accent bg-chess-accent/10 px-1.5 py-0.5 rounded">Open
+                            Source</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mb-1">Contributor • May 2025</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        Fixed issues in continuum mechanics & symbolic integration modules.
+                    </p>
+                </div>
+                <!-- Item 3 -->
+                <div class="relative">
+                    <div
+                        class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-gray-600 border-2 border-chess-card">
+                    </div>
+                    <div class="flex justify-between items-baseline mb-1">
+                        <h4 class="text-sm font-bold text-white">PipesHub</h4>
+                        <span class="text-xxs font-mono text-chess-accent bg-chess-accent/10 px-1.5 py-0.5 rounded">Open
+                            Source</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mb-1">Contributor • Oct 2025</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        Integrated PostHog analytics via Python GraphQL client & data-source wrapper.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lichess -->
+        <a href="https://lichess.org/@/jatin25chess/perf/rapid" target="_blank"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#20201d] transition-colors group border-l-4 border-l-chess-accent">
+            <div class="flex justify-between items-start">
+                <i class="fa-solid fa-chess-knight text-gray-500 group-hover:text-white"></i>
+                <span class="text-xxs font-mono text-gray-500">LICHESS</span>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-white">2068</div>
+                <div class="text-xs text-chess-accent">Rapid</div>
+            </div>
+        </a>
+
+        <!-- Chess.com -->
+        <a href="https://www.chess.com/stats/overview/jughead_iv/0" target="_blank"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#1f2f25] transition-colors group border-l-4 border-l-[#7fa650]">
+            <div class="flex justify-between items-start">
+                <i class="fa-solid fa-chess-pawn text-gray-500 group-hover:text-[#7fa650]"></i>
+                <span class="text-xxs font-mono text-gray-500">CHESS.COM</span>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-white">1673</div>
+                <div class="text-xs text-[#7fa650]">Rapid</div>
+            </div>
+        </a>
+
+        <!-- FEATURED PROJECT (2x1) -->
+        <div class="bento-card col-span-1 md:col-span-2 p-0 group">
+            <div class="h-full flex flex-col relative bg-gradient-to-br from-chess-card to-black">
+                <div class="p-5 relative z-10">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-chess-board text-chess-accent"></i>
+                            <h3 class="text-sm font-bold text-white">Chess Engine</h3>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="https://github.com/jatingaur18/Chess-Engine"
+                                class="text-gray-500 hover:text-white"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://lichess.org/@/bot-whiteworm"
+                                class="text-gray-500 hover:text-chess-accent"><i class="fa-solid fa-robot"></i></a>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mb-3 leading-relaxed">
+                        High-performance C++ engine with Bitboards. 50K+ nodes/sec. Powers "Bot Whiteworm" (1700-1800
+                        Elo) on Lichess.
+                    </p>
+                    <div class="flex gap-1">
+                        <span class="text-[10px] bg-white/5 text-gray-400 px-1.5 py-0.5 rounded">C++</span>
+                        <span class="text-[10px] bg-white/5 text-gray-400 px-1.5 py-0.5 rounded">Bitboards</span>
+                        <span class="text-[10px] bg-white/5 text-gray-400 px-1.5 py-0.5 rounded">Alpha-Beta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SMALLER PROJECTS GRID (1x1 each) -->
+        <!-- JobQuest -->
+        <a href="https://github.com/jatingaur18/JobQuest"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-blue-500/50">
+            <div>
+                <i class="fa-solid fa-list-check text-blue-500 mb-2 text-xl"></i>
+                <h4 class="text-sm font-bold text-white leading-tight">JobQuest</h4>
+                <p class="text-xxs text-gray-500 mt-1">AI Job Tracker & Skill Tests</p>
+            </div>
+            <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-blue-400">React • Node</div>
+        </a>
+
+        <!-- Load Balancer -->
+        <a href="https://github.com/jatingaur18/lb"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-purple-500/50">
+            <div>
+                <i class="fa-solid fa-network-wired text-purple-500 mb-2 text-xl"></i>
+                <h4 class="text-sm font-bold text-white leading-tight">Load Balancer</h4>
+                <p class="text-xxs text-gray-500 mt-1">Multi-threaded C++</p>
+            </div>
+            <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-purple-400">Sockets • Epoll</div>
+        </a>
+
+        <!-- Carbon Credits -->
+        <a href="https://github.com/jatingaur18"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-green-500/50">
+            <div>
+                <i class="fa-brands fa-ethereum text-green-500 mb-2 text-xl"></i>
+                <h4 class="text-sm font-bold text-white leading-tight">Carbon Credits</h4>
+                <p class="text-xxs text-gray-500 mt-1">Decentralized Trading</p>
+            </div>
+            <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-green-400">Solidity • Web3</div>
+        </a>
+
+        <!-- PL Prediction -->
+        <a href="https://github.com/jatingaur18/Hack-a-sol"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-orange-500/50">
+            <div>
+                <i class="fa-solid fa-futbol text-orange-500 mb-2 text-xl"></i>
+                <h4 class="text-sm font-bold text-white leading-tight">PL Predictor</h4>
+                <p class="text-xxs text-gray-500 mt-1">Football ML Model</p>
+            </div>
+            <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-orange-400">Python • XGBoost</div>
+        </a>
+
+        <!-- CHESS BOT PROMO + SHOOTING GAME (Span 2) -->
+        <div class="bento-card col-span-1 md:col-span-2 p-0 flex relative overflow-hidden bg-chess-accent">
+            <!-- Left Side: Content -->
+            <div class="w-1/2 p-5 flex flex-col justify-center relative z-10 pointer-events-none">
+                <div class="w-10 h-10 bg-black/20 rounded-full flex items-center justify-center mb-3">
+                    <i class="fa-solid fa-robot text-xl text-white"></i>
+                </div>
+                <h3 class="font-bold text-white text-sm mb-1">Play Bot Whiteworm</h3>
+                <p class="text-xs text-white/80 mb-3">Challenge the AI on Lichess.</p>
+                <a href="https://lichess.org/@/bot-whiteworm" target="_blank"
+                    class="pointer-events-auto inline-flex items-center gap-2 text-xs font-bold text-black bg-white px-3 py-1.5 rounded hover:bg-black hover:text-white transition-colors self-start">
+                    Play Now <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Right Side: Shooting Game Canvas -->
+        </div>
+        <div
+            class="bento-card col-span-1 md:col-span-2 p-0 flex cursor-crosshair border-l border-white/10 relative overflow-hidden  bg-[#5d7a42]">
+            <!-- <div class="w-1/2 h-full relative bg-[#5d7a42] "> -->
+            <!-- Hint Text -->
+            <div class="absolute top-2 right-2 text-[10px] text-white/60 font-mono pointer-events-none">Click to
+                Shoot!</div>
+            <canvas id="shootingCanvas" class="w-full h-full block"></canvas>
+        </div>
+
+    </div>
+
+    <!-- Animation Scripts -->
+    <script>
+        // --- 1. HERO WALKING ANIMATION (Preserved) ---
+        const heroCanvas = document.getElementById('miniCanvas');
+        const heroCtx = heroCanvas.getContext('2d');
+
+        let heroW, heroH;
+        let heroFrame = 0;
+        let heroX = -20;
+
+        function resizeHero() {
+            const rect = heroCanvas.parentNode.getBoundingClientRect();
+            heroW = heroCanvas.width = rect.width;
+            heroH = heroCanvas.height = rect.height;
+        }
+
+        function drawHeroCharacter(ctx, x, y, frameStep, color) {
+            ctx.fillStyle = color;
+            const pixelSize = 2;
+            const isStep = Math.floor(frameStep / 10) % 2 === 0;
+            ctx.fillRect(x + 2 * pixelSize, y, 4 * pixelSize, 4 * pixelSize); // Head
+            ctx.fillRect(x + 2 * pixelSize, y + 5 * pixelSize, 4 * pixelSize, 6 * pixelSize); // Body
+            if (isStep) {
+                ctx.fillRect(x, y + 5 * pixelSize, 2 * pixelSize, 5 * pixelSize);
+                ctx.fillRect(x + 6 * pixelSize, y + 5 * pixelSize, 2 * pixelSize, 5 * pixelSize);
+                ctx.fillRect(x + 2 * pixelSize, y + 11 * pixelSize, 2 * pixelSize, 5 * pixelSize);
+                ctx.fillRect(x + 4 * pixelSize, y + 11 * pixelSize, 2 * pixelSize, 5 * pixelSize);
+            } else {
+                ctx.fillRect(x + 1 * pixelSize, y + 5 * pixelSize, 2 * pixelSize, 5 * pixelSize);
+                ctx.fillRect(x + 5 * pixelSize, y + 5 * pixelSize, 2 * pixelSize, 5 * pixelSize);
+                ctx.fillRect(x, y + 11 * pixelSize, 2 * pixelSize, 4 * pixelSize);
+                ctx.fillRect(x + 6 * pixelSize, y + 11 * pixelSize, 2 * pixelSize, 4 * pixelSize);
             }
         }
 
-        // Load game when page loads
-        window.addEventListener('load', loadChessGame);
+        function animateHero() {
+            heroCtx.clearRect(0, 0, heroW, heroH);
+            heroCtx.strokeStyle = '#769656';
+            heroCtx.globalAlpha = 0.3;
+            heroCtx.beginPath();
+            heroCtx.moveTo(0, heroH - 2);
+            heroCtx.lineTo(heroW, heroH - 2);
+            heroCtx.stroke();
+            heroCtx.globalAlpha = 1.0;
 
-        // Add scroll effect to header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(5, 5, 5, 0.95)';
-            } else {
-                header.style.background = 'rgba(10, 10, 10, 0.95)';
+            heroX += 1;
+            if (heroX > heroW) heroX = -20;
+            const bob = (Math.floor(heroFrame / 10) % 2 === 0) ? 0 : -1;
+            drawHeroCharacter(heroCtx, heroX, heroH - 28 + bob, heroFrame, '#769656');
+
+            heroFrame++;
+            requestAnimationFrame(animateHero);
+        }
+
+        // --- 2. SHOOTING MINI-GAME (New) ---
+        const gameCanvas = document.getElementById('shootingCanvas');
+        const gameCtx = gameCanvas.getContext('2d');
+        let gameW, gameH;
+
+        // Game State
+        const targets = [];
+        const particles = [];
+        let gameFrame = 0;
+
+        function resizeGame() {
+            const rect = gameCanvas.parentNode.getBoundingClientRect();
+            gameW = gameCanvas.width = rect.width;
+            gameH = gameCanvas.height = rect.height;
+        }
+
+        class Target {
+            constructor() {
+                this.x = Math.random() * (gameW - 20);
+                this.y = Math.random() * (gameH - 30);
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = (Math.random() - 0.5) * 1.5;
+                this.frameOffset = Math.floor(Math.random() * 100);
+                this.color = '#ffffff';
+                this.width = 16; // Approx width of pixel man
+                this.height = 24; // Approx height
+                this.markedForDeletion = false;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Bounce off walls
+                if (this.x < 0 || this.x > gameW - this.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > gameH - this.height) this.speedY *= -1;
+            }
+            draw() {
+                const bob = (Math.floor((gameFrame + this.frameOffset) / 10) % 2 === 0) ? 0 : -2;
+                drawHeroCharacter(gameCtx, this.x, this.y + bob, gameFrame + this.frameOffset, this.color);
+            }
+        }
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 4;
+                this.speedY = (Math.random() - 0.5) * 4;
+                this.color = '#ffffff';
+                this.life = 100;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= 5;
+            }
+            draw() {
+                gameCtx.fillStyle = `rgba(255, 255, 255, ${this.life / 100})`;
+                gameCtx.fillRect(this.x, this.y, this.size, this.size);
+            }
+        }
+
+        function initGame() {
+            // Spawn initial humans
+            for (let i = 0; i < 6; i++) {
+                targets.push(new Target());
+            }
+        }
+
+        // Shoot Interaction
+        gameCanvas.addEventListener('mousedown', (e) => {
+            const rect = gameCanvas.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+
+            // Check hits
+            let hit = false;
+            for (let i = targets.length - 1; i >= 0; i--) {
+                const t = targets[i];
+                if (clickX >= t.x - 5 && clickX <= t.x + t.width + 5 &&
+                    clickY >= t.y - 5 && clickY <= t.y + t.height + 5) {
+
+                    // BLAST!
+                    for (let j = 0; j < 8; j++) {
+                        particles.push(new Particle(t.x + t.width / 2, t.y + t.height / 2));
+                    }
+                    targets.splice(i, 1);
+                    hit = true;
+
+                    // Respawn after delay
+                    setTimeout(() => targets.push(new Target()), 1000);
+                }
+            }
+
+            // Visual feedback for missed click
+            if (!hit) {
+                // Maybe small ripple?
             }
         });
 
-        // Walking People Animation
-        console.clear()
+        function animateGame() {
+            gameCtx.clearRect(0, 0, gameW, gameH);
 
-        const config = {
-          src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/open-peeps-sheet.png',
-          rows: 15,
-          cols: 7
+            // Update Targets
+            targets.forEach(t => {
+                t.update();
+                t.draw();
+            });
+
+            // Update Particles
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].life <= 0) particles.splice(i, 1);
+            }
+
+            gameFrame++;
+            requestAnimationFrame(animateGame);
         }
 
-        // UTILS
-        const randomRange = (min, max) => min + Math.random() * (max - min)
-        const randomIndex = (array) => randomRange(0, array.length) | 0
-        const removeFromArray = (array, i) => array.splice(i, 1)[0]
-        const removeItemFromArray = (array, item) => removeFromArray(array, array.indexOf(item))
-        const removeRandomFromArray = (array) => removeFromArray(array, randomIndex(array))
-        const getRandomFromArray = (array) => (array[randomIndex(array) | 0])
 
-        // TWEEN FACTORIES
-        const resetPeep = ({ stage, peep }) => {
-          const direction = Math.random() > 0.5 ? 1 : -1
-          // Reduced the offsetY calculation to keep people more visible
-          const offsetY = 50 - 100 * gsap.parseEase('power2.in')(Math.random())
-          const startY = stage.height - peep.height + offsetY
-          let startX
-          let endX
-          
-          if (direction === 1) {
-            startX = -peep.width
-            endX = stage.width
-            peep.scaleX = 1
-          } else {
-            startX = stage.width + peep.width
-            endX = 0
-            peep.scaleX = -1
-          }
-          
-          peep.x = startX
-          peep.y = startY
-          peep.anchorY = startY
-          
-          return { startX, startY, endX }
-        }
+        // --- INIT ALL ---
+        window.addEventListener('resize', () => {
+            resizeHero();
+            resizeGame();
+        });
 
-        const normalWalk = ({ peep, props }) => {
-          const { startX, startY, endX } = props
-          const xDuration = 10
-          const yDuration = 0.25
-          
-          const tl = gsap.timeline()
-          tl.timeScale(randomRange(0.5, 1.5))
-          tl.to(peep, { duration: xDuration, x: endX, ease: 'none' }, 0)
-          tl.to(peep, { duration: yDuration, repeat: xDuration / yDuration, yoyo: true, y: startY - 10 }, 0)
-            
-          return tl
-        }
+        // Start
+        setTimeout(() => {
+            resizeHero();
+            animateHero();
 
-        const walks = [normalWalk]
+            resizeGame();
+            initGame();
+            animateGame();
+        }, 100);
 
-        // CLASSES
-        class Peep {
-          constructor({ image, rect }) {
-            this.image = image
-            this.setRect(rect)
-            this.x = 0
-            this.y = 0
-            this.anchorY = 0
-            this.scaleX = 1
-            this.walk = null
-          }
-          
-          setRect (rect) {
-            this.rect = rect
-            this.width = rect[2]
-            this.height = rect[3]
-            this.drawArgs = [this.image, ...rect, 0, 0, this.width, this.height]
-          }
-          
-          render (ctx) {
-            ctx.save()
-            ctx.translate(this.x, this.y)
-            ctx.scale(this.scaleX, 1)
-            ctx.drawImage(...this.drawArgs)
-            ctx.restore()
-          }
-        }
-
-        // MAIN
-        const img = document.createElement('img')
-        const canvas = document.querySelector('#canvas')
-        const ctx = canvas.getContext('2d')
-
-        const stage = { width: 0, height: 0 }
-        const allPeeps = []
-        const availablePeeps = []
-        const crowd = []
-
-        function initPeopleAnimation() {
-          createPeeps()
-          resize()
-          gsap.ticker.add(render)
-          window.addEventListener('resize', resize)
-        }
-
-        function createPeeps () {
-          const { rows, cols } = config
-          const { naturalWidth: width, naturalHeight: height } = img
-          const total = rows * cols
-          const rectWidth = width / rows
-          const rectHeight = height / cols
-          
-          for (let i = 0; i < total; i++) {
-            allPeeps.push(new Peep({
-              image: img,
-              rect: [(i % rows) * rectWidth, (i / rows | 0) * rectHeight, rectWidth, rectHeight]
-            }))
-          }
-        }
-
-        function resize () {
-          stage.width = canvas.clientWidth
-          stage.height = canvas.clientHeight
-          canvas.width = stage.width * devicePixelRatio
-          canvas.height = stage.height * devicePixelRatio
-          
-          crowd.forEach((peep) => { peep.walk.kill() })
-          crowd.length = 0
-          availablePeeps.length = 0
-          availablePeeps.push(...allPeeps)
-          initCrowd()
-        }
-
-        function initCrowd () {
-          while (availablePeeps.length) {
-            addPeepToCrowd().walk.progress(Math.random())
-          }
-        }
-
-        function addPeepToCrowd () {
-          const peep = removeRandomFromArray(availablePeeps)
-          const walk = getRandomFromArray(walks)({
-            peep,
-            props: resetPeep({ peep, stage })
-          }).eventCallback('onComplete', () => {
-            removePeepFromCrowd(peep)
-            addPeepToCrowd()
-          })
-          
-          peep.walk = walk
-          crowd.push(peep)
-          crowd.sort((a, b) => a.anchorY - b.anchorY)
-          return peep
-        }
-
-        function removePeepFromCrowd (peep) {
-          removeItemFromArray(crowd, peep)
-          availablePeeps.push(peep)
-        }
-
-        function render () {
-          canvas.width = canvas.width
-          ctx.save()
-          ctx.scale(devicePixelRatio, devicePixelRatio)
-          crowd.forEach((peep) => { peep.render(ctx) })
-          ctx.restore()
-        }
-
-        // Initialize animation after image loads
-        img.onload = initPeopleAnimation
-        img.src = config.src
     </script>
 </body>
+
 </html>
