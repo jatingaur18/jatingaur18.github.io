@@ -21,13 +21,13 @@
                     },
                     colors: {
                         chess: {
-                            bg: '#161512',      // Lichess-style dark background
-                            card: '#262421',    // Slightly lighter card
-                            light: '#babebb',   // Text gray
+                            bg: '#161512',      
+                            card: '#262421',    
+                            light: '#babebb',   
                             white: '#ffffff',
-                            accent: '#769656',  // Standard Tournament Board Green
+                            accent: '#769656',  
                             accentHover: '#5d7a42',
-                            danger: '#ca3431'   // Red for "busy" etc
+                            danger: '#ca3431'   
                         }
                     }
                 }
@@ -91,10 +91,10 @@
 
 <body class="min-h-screen p-4 flex justify-center items-start pt-10 pb-10">
 
-    <!-- Grid: 1 col mobile, 2 col tablet, 4 col desktop -->
+    
     <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-[minmax(100px,auto)]">
 
-        <!-- 1. PROFILE / HERO (2x2) -->
+        
         <div class="bento-card col-span-1 md:col-span-2 row-span-2 p-6 flex flex-col justify-between relative">
             <div class="absolute top-4 right-4 text-chess-accent opacity-20">
                 <i class="fa-solid fa-chess-king text-6xl"></i>
@@ -125,13 +125,13 @@
                 </div>
             </div>
 
-            <!-- Walking Animation Footer Strip inside Hero (PRESERVED) -->
+            
             <div class="absolute bottom-0 left-0 w-full h-8 bg-black/20 border-t border-white/5 overflow-hidden">
                 <canvas id="miniCanvas" class="w-full h-full opacity-50"></canvas>
             </div>
         </div>
 
-        <!-- 2. SKILLS (2x1) -->
+        
         <div class="bento-card col-span-1 md:col-span-2 p-5 flex flex-col justify-center">
             <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-bolt text-chess-accent"></i> Arsenal
@@ -150,8 +150,8 @@
             </div>
         </div>
 
-        <!-- 3. CP & CHESS STATS (Mix of 1x1) -->
-        <!-- Codeforces -->
+        
+        
         <a href="https://codeforces.com/profile/jugheadjones" target="_blank"
             class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#1f2f3d] transition-colors group">
             <div class="flex justify-between items-start">
@@ -164,7 +164,7 @@
             </div>
         </a>
 
-        <!-- LeetCode -->
+        
         <a href="https://leetcode.com/jatingaur18" target="_blank"
             class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#2c2618] transition-colors group">
             <div class="flex justify-between items-start">
@@ -177,14 +177,14 @@
             </div>
         </a>
 
-        <!-- Experience (2x2) -->
+        
         <div class="bento-card col-span-1 md:col-span-2 row-span-2 p-5 overflow-y-auto">
             <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
                 <i class="fa-solid fa-briefcase text-chess-accent"></i> Experience
             </h3>
 
             <div class="relative pl-4 border-l border-white/10 space-y-6">
-                <!-- Item 1 -->
+                
                 <div class="relative">
                     <div
                         class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-chess-accent border-2 border-chess-card">
@@ -200,7 +200,7 @@
                         format.
                     </p>
                 </div>
-                <!-- Item 2 -->
+                
                 <div class="relative">
                     <div
                         class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-gray-600 border-2 border-chess-card">
@@ -215,7 +215,7 @@
                         Fixed issues in continuum mechanics & symbolic integration modules.
                     </p>
                 </div>
-                <!-- Item 3 -->
+                
                 <div class="relative">
                     <div
                         class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-gray-600 border-2 border-chess-card">
@@ -233,7 +233,7 @@
             </div>
         </div>
 
-        <!-- Lichess -->
+        
         <a href="https://lichess.org/@/jatin25chess/perf/rapid" target="_blank"
             class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#20201d] transition-colors group border-l-4 border-l-chess-accent">
             <div class="flex justify-between items-start">
@@ -246,7 +246,7 @@
             </div>
         </a>
 
-        <!-- Chess.com -->
+        
         <a href="https://www.chess.com/stats/overview/jughead_iv/0" target="_blank"
             class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#1f2f25] transition-colors group border-l-4 border-l-[#7fa650]">
             <div class="flex justify-between items-start">
@@ -259,7 +259,7 @@
             </div>
         </a>
 
-        <!-- FEATURED PROJECT (2x1) -->
+        
         <div class="bento-card col-span-1 md:col-span-2 p-0 group">
             <div class="h-full flex flex-col relative bg-gradient-to-br from-chess-card to-black">
                 <div class="p-5 relative z-10">
@@ -288,8 +288,8 @@
             </div>
         </div>
 
-        <!-- SMALLER PROJECTS GRID (1x1 each) -->
-        <!-- JobQuest -->
+        
+        
         <a href="https://github.com/jatingaur18/JobQuest"
             class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-blue-500/50">
             <div>
@@ -300,7 +300,7 @@
             <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-blue-400">React • Node</div>
         </a>
 
-        <!-- Load Balancer -->
+        
         <a href="https://github.com/jatingaur18/lb"
             class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-purple-500/50">
             <div>
@@ -311,7 +311,7 @@
             <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-purple-400">Sockets • Epoll</div>
         </a>
 
-        <!-- Carbon Credits -->
+        
         <a href="https://github.com/jatingaur18"
             class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-green-500/50">
             <div>
@@ -322,7 +322,7 @@
             <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-green-400">Solidity • Web3</div>
         </a>
 
-        <!-- PL Prediction -->
+        
         <a href="https://github.com/jatingaur18/Hack-a-sol"
             class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-orange-500/50">
             <div>
@@ -333,9 +333,9 @@
             <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-orange-400">Python • XGBoost</div>
         </a>
 
-        <!-- CHESS BOT PROMO + SHOOTING GAME (Span 2) -->
+        
         <div class="bento-card col-span-1 md:col-span-2 p-0 flex relative overflow-hidden bg-chess-accent">
-            <!-- Left Side: Content -->
+            
             <div class="w-1/2 p-5 flex flex-col justify-center relative z-10 pointer-events-none">
                 <div class="w-10 h-10 bg-black/20 rounded-full flex items-center justify-center mb-3">
                     <i class="fa-solid fa-robot text-xl text-white"></i>
@@ -348,12 +348,12 @@
                 </a>
             </div>
 
-            <!-- Right Side: Shooting Game Canvas -->
+            
         </div>
         <div
             class="bento-card col-span-1 md:col-span-2 p-0 flex cursor-crosshair border-l border-white/10 relative overflow-hidden  bg-[#5d7a42]">
-            <!-- <div class="w-1/2 h-full relative bg-[#5d7a42] "> -->
-            <!-- Hint Text -->
+            
+            
             <div class="absolute top-2 right-2 text-[10px] text-white/60 font-mono pointer-events-none">Click to
                 Shoot!</div>
             <canvas id="shootingCanvas" class="w-full h-full block"></canvas>
@@ -361,9 +361,9 @@
 
     </div>
 
-    <!-- Animation Scripts -->
+    
     <script>
-        // --- 1. HERO WALKING ANIMATION (Preserved) ---
+        
         const heroCanvas = document.getElementById('miniCanvas');
         const heroCtx = heroCanvas.getContext('2d');
 
@@ -381,8 +381,8 @@
             ctx.fillStyle = color;
             const pixelSize = 2;
             const isStep = Math.floor(frameStep / 10) % 2 === 0;
-            ctx.fillRect(x + 2 * pixelSize, y, 4 * pixelSize, 4 * pixelSize); // Head
-            ctx.fillRect(x + 2 * pixelSize, y + 5 * pixelSize, 4 * pixelSize, 6 * pixelSize); // Body
+            ctx.fillRect(x + 2 * pixelSize, y, 4 * pixelSize, 4 * pixelSize); 
+            ctx.fillRect(x + 2 * pixelSize, y + 5 * pixelSize, 4 * pixelSize, 6 * pixelSize); 
             if (isStep) {
                 ctx.fillRect(x, y + 5 * pixelSize, 2 * pixelSize, 5 * pixelSize);
                 ctx.fillRect(x + 6 * pixelSize, y + 5 * pixelSize, 2 * pixelSize, 5 * pixelSize);
@@ -415,12 +415,12 @@
             requestAnimationFrame(animateHero);
         }
 
-        // --- 2. SHOOTING MINI-GAME (New) ---
+        
         const gameCanvas = document.getElementById('shootingCanvas');
         const gameCtx = gameCanvas.getContext('2d');
         let gameW, gameH;
 
-        // Game State
+        
         const targets = [];
         const particles = [];
         let gameFrame = 0;
@@ -439,15 +439,15 @@
                 this.speedY = (Math.random() - 0.5) * 1.5;
                 this.frameOffset = Math.floor(Math.random() * 100);
                 this.color = '#ffffff';
-                this.width = 16; // Approx width of pixel man
-                this.height = 24; // Approx height
+                this.width = 16; 
+                this.height = 24; 
                 this.markedForDeletion = false;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                // Bounce off walls
+                
                 if (this.x < 0 || this.x > gameW - this.width) this.speedX *= -1;
                 if (this.y < 0 || this.y > gameH - this.height) this.speedY *= -1;
             }
@@ -479,53 +479,48 @@
         }
 
         function initGame() {
-            // Spawn initial humans
+            
             for (let i = 0; i < 6; i++) {
                 targets.push(new Target());
             }
         }
 
-        // Shoot Interaction
+        
         gameCanvas.addEventListener('mousedown', (e) => {
             const rect = gameCanvas.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
             const clickY = e.clientY - rect.top;
 
-            // Check hits
+            
             let hit = false;
             for (let i = targets.length - 1; i >= 0; i--) {
                 const t = targets[i];
                 if (clickX >= t.x - 5 && clickX <= t.x + t.width + 5 &&
                     clickY >= t.y - 5 && clickY <= t.y + t.height + 5) {
 
-                    // BLAST!
+                    
                     for (let j = 0; j < 8; j++) {
                         particles.push(new Particle(t.x + t.width / 2, t.y + t.height / 2));
                     }
                     targets.splice(i, 1);
                     hit = true;
 
-                    // Respawn after delay
                     setTimeout(() => targets.push(new Target()), 1000);
                 }
             }
 
-            // Visual feedback for missed click
             if (!hit) {
-                // Maybe small ripple?
             }
         });
 
         function animateGame() {
             gameCtx.clearRect(0, 0, gameW, gameH);
 
-            // Update Targets
             targets.forEach(t => {
                 t.update();
                 t.draw();
             });
 
-            // Update Particles
             for (let i = particles.length - 1; i >= 0; i--) {
                 particles[i].update();
                 particles[i].draw();
@@ -537,13 +532,11 @@
         }
 
 
-        // --- INIT ALL ---
         window.addEventListener('resize', () => {
             resizeHero();
             resizeGame();
         });
 
-        // Start
         setTimeout(() => {
             resizeHero();
             animateHero();
