@@ -21,13 +21,13 @@
                     },
                     colors: {
                         chess: {
-                            bg: '#161512',      
-                            card: '#262421',    
-                            light: '#babebb',   
+                            bg: '#161512',      // Lichess-style dark background
+                            card: '#262421',    // Slightly lighter card
+                            light: '#babebb',   // Text gray
                             white: '#ffffff',
-                            accent: '#769656',  
+                            accent: '#769656',  // Standard Tournament Board Green
                             accentHover: '#5d7a42',
-                            danger: '#ca3431'   
+                            danger: '#ca3431'   // Red for "busy" etc
                         }
                     }
                 }
@@ -64,6 +64,27 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
+        /* NEW: Neon Purple Breathing Animation */
+        @keyframes neon-breathe {
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px rgba(168, 85, 247, 0.2), inset 0 0 0px rgba(168, 85, 247, 0);
+                border-color: rgba(168, 85, 247, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(168, 85, 247, 0.4), inset 0 0 10px rgba(168, 85, 247, 0.1);
+                border-color: rgba(168, 85, 247, 0.8);
+            }
+        }
+
+        .card-highlight-purple {
+            animation: neon-breathe 4s infinite ease-in-out;
+            background: linear-gradient(135deg, #262421 0%, #1e1b2e 100%);
+            /* Subtle purple fade */
+        }
+
         /* Compact Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -91,10 +112,10 @@
 
 <body class="min-h-screen p-4 flex justify-center items-start pt-10 pb-10">
 
-    
+    <!-- Grid: 1 col mobile, 2 col tablet, 4 col desktop -->
     <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-[minmax(100px,auto)]">
 
-        
+        <!-- 1. PROFILE / HERO (2x2) -->
         <div class="bento-card col-span-1 md:col-span-2 row-span-2 p-6 flex flex-col justify-between relative">
             <div class="absolute top-4 right-4 text-chess-accent opacity-20">
                 <i class="fa-solid fa-chess-king text-6xl"></i>
@@ -117,21 +138,20 @@
                         class="px-4 py-2 bg-black/30 hover:bg-chess-accent text-white text-xs font-bold rounded transition-colors flex items-center gap-2 border border-white/5">
                         <i class="fa-brands fa-github"></i> GitHub
                     </a>
-                    <a href="https://drive.google.com/file/d/1nmxWa5QQkljI5IwLO1XnhNxj16UMOQSP/view?usp=sharing"
-                        target="_blank"
+                    <a href="https://drive.google.com/file/d/1J8aSMR45Dtth6kVPUkmQi8Fdw4aKIr7A/view" target="_blank"
                         class="px-4 py-2 bg-chess-accent hover:bg-chess-accentHover text-white text-xs font-bold rounded transition-colors flex items-center gap-2 shadow-lg shadow-chess-accent/20">
                         <i class="fa-solid fa-file-pdf"></i> Resume
                     </a>
                 </div>
             </div>
 
-            
+            <!-- Walking Animation Footer Strip inside Hero (PRESERVED) -->
             <div class="absolute bottom-0 left-0 w-full h-8 bg-black/20 border-t border-white/5 overflow-hidden">
                 <canvas id="miniCanvas" class="w-full h-full opacity-50"></canvas>
             </div>
         </div>
 
-        
+        <!-- 2. SKILLS (2x1) -->
         <div class="bento-card col-span-1 md:col-span-2 p-5 flex flex-col justify-center">
             <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-bolt text-chess-accent"></i> Arsenal
@@ -150,8 +170,8 @@
             </div>
         </div>
 
-        
-        
+        <!-- 3. CP & CHESS STATS (Mix of 1x1) -->
+        <!-- Codeforces -->
         <a href="https://codeforces.com/profile/jugheadjones" target="_blank"
             class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#1f2f3d] transition-colors group">
             <div class="flex justify-between items-start">
@@ -164,7 +184,7 @@
             </div>
         </a>
 
-        
+        <!-- LeetCode -->
         <a href="https://leetcode.com/jatingaur18" target="_blank"
             class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#2c2618] transition-colors group">
             <div class="flex justify-between items-start">
@@ -177,14 +197,14 @@
             </div>
         </a>
 
-        
+        <!-- Experience (2x2) -->
         <div class="bento-card col-span-1 md:col-span-2 row-span-2 p-5 overflow-y-auto">
             <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4 flex items-center gap-2">
                 <i class="fa-solid fa-briefcase text-chess-accent"></i> Experience
             </h3>
 
             <div class="relative pl-4 border-l border-white/10 space-y-6">
-                
+                <!-- Item 1 -->
                 <div class="relative">
                     <div
                         class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-chess-accent border-2 border-chess-card">
@@ -192,7 +212,7 @@
                     <div class="flex justify-between items-baseline mb-1">
                         <h4 class="text-sm font-bold text-white">Samsung R&D</h4>
                         <span
-                            class="text-xxs font-mono text-chess-accent bg-chess-accent/10 px-1.5 py-0.5 rounded">Internship</span>
+                            class="text-xxs font-mono text-chess-accent bg-chess-accent/10 px-1.5 py-0.5 rounded">Current</span>
                     </div>
                     <p class="text-xs text-gray-400 mb-1">Research Intern • Sept 2024</p>
                     <p class="text-xs text-gray-500 leading-relaxed">
@@ -200,30 +220,28 @@
                         format.
                     </p>
                 </div>
-                
+                <!-- Item 2 -->
                 <div class="relative">
                     <div
                         class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-gray-600 border-2 border-chess-card">
                     </div>
                     <div class="flex justify-between items-baseline mb-1">
                         <h4 class="text-sm font-bold text-white">SymPy</h4>
-                        <span class="text-xxs font-mono text-chess-accent bg-chess-accent/10 px-1.5 py-0.5 rounded">Open
-                            Source</span>
+                        <span class="text-xxs font-mono text-gray-500">Open Source</span>
                     </div>
                     <p class="text-xs text-gray-400 mb-1">Contributor • May 2025</p>
                     <p class="text-xs text-gray-500 leading-relaxed">
                         Fixed issues in continuum mechanics & symbolic integration modules.
                     </p>
                 </div>
-                
+                <!-- Item 3 -->
                 <div class="relative">
                     <div
                         class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-gray-600 border-2 border-chess-card">
                     </div>
                     <div class="flex justify-between items-baseline mb-1">
                         <h4 class="text-sm font-bold text-white">PipesHub</h4>
-                        <span class="text-xxs font-mono text-chess-accent bg-chess-accent/10 px-1.5 py-0.5 rounded">Open
-                            Source</span>
+                        <span class="text-xxs font-mono text-gray-500">Open Source</span>
                     </div>
                     <p class="text-xs text-gray-400 mb-1">Contributor • Oct 2025</p>
                     <p class="text-xs text-gray-500 leading-relaxed">
@@ -233,7 +251,7 @@
             </div>
         </div>
 
-        
+        <!-- Lichess -->
         <a href="https://lichess.org/@/jatin25chess/perf/rapid" target="_blank"
             class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#20201d] transition-colors group border-l-4 border-l-chess-accent">
             <div class="flex justify-between items-start">
@@ -246,7 +264,7 @@
             </div>
         </a>
 
-        
+        <!-- Chess.com -->
         <a href="https://www.chess.com/stats/overview/jughead_iv/0" target="_blank"
             class="bento-card col-span-1 p-4 flex flex-col justify-between hover:bg-[#1f2f25] transition-colors group border-l-4 border-l-[#7fa650]">
             <div class="flex justify-between items-start">
@@ -254,12 +272,12 @@
                 <span class="text-xxs font-mono text-gray-500">CHESS.COM</span>
             </div>
             <div>
-                <div class="text-2xl font-bold text-white">1673</div>
+                <div class="text-2xl font-bold text-white">1630</div>
                 <div class="text-xs text-[#7fa650]">Rapid</div>
             </div>
         </a>
 
-        
+        <!-- FEATURED PROJECT (2x1) -->
         <div class="bento-card col-span-1 md:col-span-2 p-0 group">
             <div class="h-full flex flex-col relative bg-gradient-to-br from-chess-card to-black">
                 <div class="p-5 relative z-10">
@@ -288,8 +306,8 @@
             </div>
         </div>
 
-        
-        
+        <!-- SMALLER PROJECTS GRID (1x1 each) -->
+        <!-- JobQuest -->
         <a href="https://github.com/jatingaur18/JobQuest"
             class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-blue-500/50">
             <div>
@@ -300,18 +318,28 @@
             <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-blue-400">React • Node</div>
         </a>
 
-        
-        <a href="https://github.com/jatingaur18/lb"
-            class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-purple-500/50">
-            <div>
-                <i class="fa-solid fa-network-wired text-purple-500 mb-2 text-xl"></i>
-                <h4 class="text-sm font-bold text-white leading-tight">Load Balancer</h4>
-                <p class="text-xxs text-gray-500 mt-1">Multi-threaded C++</p>
+        <!-- Chess Metrics (Updated: Purple Neon Theme) -->
+        <a href="https://jatingaur18.github.io/chessMetrics.html"
+            class="bento-card col-span-1 p-4 flex flex-col justify-between group card-highlight-purple">
+            <div class="relative z-10">
+                <div class="flex justify-between items-start">
+                    <i class="fa-solid fa-chart-pie text-purple-400 mb-2 text-xl"></i>
+                    <span
+                        class="bg-purple-500/20 text-purple-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-purple-500/30">Analytics</span>
+                </div>
+                <h4 class="text-sm font-bold text-white leading-tight">Chess Metrics</h4>
+                <p class="text-xxs text-gray-400 mt-1">Advanced Game Insights</p>
             </div>
-            <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-purple-400">Sockets • Epoll</div>
+            <div class="mt-2 text-xxs font-mono text-gray-500 group-hover:text-purple-300 transition-colors">Python •
+                Data Viz</div>
+
+            <!-- Glow effect overlay -->
+            <div
+                class="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            </div>
         </a>
 
-        
+        <!-- Carbon Credits -->
         <a href="https://github.com/jatingaur18"
             class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-green-500/50">
             <div>
@@ -322,7 +350,7 @@
             <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-green-400">Solidity • Web3</div>
         </a>
 
-        
+
         <a href="https://github.com/jatingaur18/Hack-a-sol"
             class="bento-card col-span-1 p-4 flex flex-col justify-between group hover:border-orange-500/50">
             <div>
@@ -333,9 +361,9 @@
             <div class="mt-2 text-xxs font-mono text-gray-600 group-hover:text-orange-400">Python • XGBoost</div>
         </a>
 
-        
+
         <div class="bento-card col-span-1 md:col-span-2 p-0 flex relative overflow-hidden bg-chess-accent">
-            
+
             <div class="w-1/2 p-5 flex flex-col justify-center relative z-10 pointer-events-none">
                 <div class="w-10 h-10 bg-black/20 rounded-full flex items-center justify-center mb-3">
                     <i class="fa-solid fa-robot text-xl text-white"></i>
@@ -348,12 +376,12 @@
                 </a>
             </div>
 
-            
+
         </div>
         <div
             class="bento-card col-span-1 md:col-span-2 p-0 flex cursor-crosshair border-l border-white/10 relative overflow-hidden  bg-[#5d7a42]">
-            
-            
+
+
             <div class="absolute top-2 right-2 text-[10px] text-white/60 font-mono pointer-events-none">Click to
                 Shoot!</div>
             <canvas id="shootingCanvas" class="w-full h-full block"></canvas>
@@ -361,9 +389,10 @@
 
     </div>
 
-    
+
+    <!-- Animation Scripts -->
     <script>
-        
+        // --- 1. HERO WALKING ANIMATION (Preserved) ---
         const heroCanvas = document.getElementById('miniCanvas');
         const heroCtx = heroCanvas.getContext('2d');
 
@@ -381,8 +410,8 @@
             ctx.fillStyle = color;
             const pixelSize = 2;
             const isStep = Math.floor(frameStep / 10) % 2 === 0;
-            ctx.fillRect(x + 2 * pixelSize, y, 4 * pixelSize, 4 * pixelSize); 
-            ctx.fillRect(x + 2 * pixelSize, y + 5 * pixelSize, 4 * pixelSize, 6 * pixelSize); 
+            ctx.fillRect(x + 2 * pixelSize, y, 4 * pixelSize, 4 * pixelSize); // Head
+            ctx.fillRect(x + 2 * pixelSize, y + 5 * pixelSize, 4 * pixelSize, 6 * pixelSize); // Body
             if (isStep) {
                 ctx.fillRect(x, y + 5 * pixelSize, 2 * pixelSize, 5 * pixelSize);
                 ctx.fillRect(x + 6 * pixelSize, y + 5 * pixelSize, 2 * pixelSize, 5 * pixelSize);
@@ -415,12 +444,12 @@
             requestAnimationFrame(animateHero);
         }
 
-        
+        // --- 2. SHOOTING MINI-GAME (New) ---
         const gameCanvas = document.getElementById('shootingCanvas');
         const gameCtx = gameCanvas.getContext('2d');
         let gameW, gameH;
 
-        
+        // Game State
         const targets = [];
         const particles = [];
         let gameFrame = 0;
@@ -439,15 +468,15 @@
                 this.speedY = (Math.random() - 0.5) * 1.5;
                 this.frameOffset = Math.floor(Math.random() * 100);
                 this.color = '#ffffff';
-                this.width = 16; 
-                this.height = 24; 
+                this.width = 16; // Approx width of pixel man
+                this.height = 24; // Approx height
                 this.markedForDeletion = false;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                
+                // Bounce off walls
                 if (this.x < 0 || this.x > gameW - this.width) this.speedX *= -1;
                 if (this.y < 0 || this.y > gameH - this.height) this.speedY *= -1;
             }
@@ -479,48 +508,53 @@
         }
 
         function initGame() {
-            
+            // Spawn initial humans
             for (let i = 0; i < 6; i++) {
                 targets.push(new Target());
             }
         }
 
-        
+        // Shoot Interaction
         gameCanvas.addEventListener('mousedown', (e) => {
             const rect = gameCanvas.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
             const clickY = e.clientY - rect.top;
 
-            
+            // Check hits
             let hit = false;
             for (let i = targets.length - 1; i >= 0; i--) {
                 const t = targets[i];
                 if (clickX >= t.x - 5 && clickX <= t.x + t.width + 5 &&
                     clickY >= t.y - 5 && clickY <= t.y + t.height + 5) {
 
-                    
+                    // BLAST!
                     for (let j = 0; j < 8; j++) {
                         particles.push(new Particle(t.x + t.width / 2, t.y + t.height / 2));
                     }
                     targets.splice(i, 1);
                     hit = true;
 
+                    // Respawn after delay
                     setTimeout(() => targets.push(new Target()), 1000);
                 }
             }
 
+            // Visual feedback for missed click
             if (!hit) {
+                // Maybe small ripple?
             }
         });
 
         function animateGame() {
             gameCtx.clearRect(0, 0, gameW, gameH);
 
+            // Update Targets
             targets.forEach(t => {
                 t.update();
                 t.draw();
             });
 
+            // Update Particles
             for (let i = particles.length - 1; i >= 0; i--) {
                 particles[i].update();
                 particles[i].draw();
@@ -532,11 +566,13 @@
         }
 
 
+        // --- INIT ALL ---
         window.addEventListener('resize', () => {
             resizeHero();
             resizeGame();
         });
 
+        // Start
         setTimeout(() => {
             resizeHero();
             animateHero();

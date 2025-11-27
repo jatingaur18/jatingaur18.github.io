@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering ChessMetrics: Analysis Engine Architecture | Jatin Gaur</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Prism.js for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        chess: {
+                            bg: '#0e0e0c', /* Darker background for professional look */
+                            card: '#1a1917',
+                            border: '#2a2926',
+                            light: '#e0e0e0',
+                            muted: '#a0a0a0',
+                            accent: '#769656',
+                            accentHover: '#5d7a42',
+                            gold: '#f5c951',
+                            error: '#cc3333',
+                            info: '#4a9eff'
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #2a2926 1px, transparent 1px), linear-gradient(to bottom, #2a2926 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0e0e0c;
+            color: #babebb;
+            min-height: 100vh;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, 10%, black, 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, 5%, black, 95%, transparent);
+            opacity: 0.15;
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background-color: #1a1917;
+            border: 1px solid #2a2926;
+            border-radius: 8px;
+            /* Sharper corners for pro feel */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: #2a2926;
+            font-size: 4rem;
+            line-height: 1;
+            position: absolute;
+            top: -1rem;
+            right: 1rem;
+            z-index: 0;
+            opacity: 0.5;
+        }
+
+        /* Syntax Highlighting Tweaks for Engineering Blog Look */
+        pre[class*="language-"] {
+            background: #111 !important;
+            border: 1px solid #2a2926;
+            border-radius: 6px;
+            margin: 0;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        code[class*="language-"],
+        pre[class*="language-"] {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-header {
+            background: #141412;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #2a2926;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .math-formula {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(118, 150, 86, 0.1);
+            border: 1px solid rgba(118, 150, 86, 0.2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            color: #e0e0e0;
+            display: inline-block;
+        }
+
+        .diagram-box {
+            border: 1px dashed #444;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="font-sans selection:bg-chess-accent selection:text-white antialiased">
+
+    <div class="bg-grid bg-grid-pattern"></div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-[#0e0e0c]/90 border-b border-chess-border">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-display font-bold text-lg text-white flex items-center gap-3">
+                <div class="w-8 h-8 bg-chess-accent rounded flex items-center justify-center text-white">
+                    <i class="fa-solid fa-chess-knight"></i>
+                </div>
+                <span>ChessMetrics <span class="text-chess-muted font-normal text-sm ml-2">Engineering Log</span></span>
+            </a>
+            <div class="hidden md:flex gap-6 text-sm font-medium text-chess-muted items-center">
+                <a href="#polyglot" class="hover:text-white transition-colors">Hashing Strategy</a>
+                <a href="#accuracy" class="hover:text-white transition-colors">Accuracy Model</a>
+                <a href="#phases" class="hover:text-white transition-colors">Heuristics</a>
+                <a href="#data" class="hover:text-white transition-colors">Aggregation</a>
+
+                <div class="h-4 w-px bg-chess-border mx-2"></div>
+
+                <a href="https://chess-metrics.vercel.app/" target="_blank"
+                    class="flex items-center gap-2 px-4 py-2 bg-chess-accent text-white rounded hover:bg-chess-accentHover transition-colors font-semibold shadow-lg shadow-chess-accent/10">
+                    <i class="fa-solid fa-rocket"></i> Launch App
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-24 pb-20 px-6 border-b border-chess-border">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded border border-chess-accent/30 bg-chess-accent/10 text-chess-accent text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-chess-accent"></span>
+                    v2.0.1 Analysis Engine
+                </div>
+                <a href="https://chess-metrics.vercel.app/" target="_blank"
+                    class="text-sm text-chess-accent hover:underline flex items-center gap-1">
+                    View Live Deployment <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-display font-bold text-white mb-8 leading-tight tracking-tight">
+                From Raw PGN to <br> <span class="text-chess-accent">Cognitive Metrics</span>
+            </h1>
+            <p class="text-xl text-gray-400 leading-relaxed max-w-2xl mb-10">
+                ChessMetrics is a bespoke analytics pipeline built to audit chess performance beyond standard win/loss
+                ratios. By leveraging <span class="text-white">Stockfish 16</span>, <span class="text-white">Polyglot
+                    Hashing</span>, and custom <span class="text-white">heuristic algorithms</span>, the system
+                decomposes raw game data into actionable insights on opening preparation and endgame precision.
+            </p>
+
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm font-mono text-gray-500 border-t border-chess-border pt-8">
+                <div>
+                    <span class="block text-gray-300">Language</span>
+                    Python 3.11
+                </div>
+                <div>
+                    <span class="block text-gray-300">Engine</span>
+                    Stockfish 16 (UCI)
+                </div>
+                <div>
+                    <span class="block text-gray-300">Database</span>
+                    MongoDB Atlas
+                </div>
+                <div>
+                    <span class="block text-gray-300">Library</span>
+                    python-chess
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-24 space-y-32">
+
+        <!-- SECTION 1: POLYGLOT & BOOK MOVES -->
+        <section id="polyglot" class="relative scroll-mt-32">
+            <div class="section-number">01</div>
+
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold text-white mb-2">Opening Identification</h2>
+                        <p class="text-chess-accent font-mono text-sm">Implementation: Zobrist Hashing via Polyglot</p>
+                    </div>
+
+                    <p class="text-gray-400 leading-relaxed">
+                        Detecting "Book Moves" (established theory) is computationally non-trivial due to
+                        <strong>transpositions</strong>. A naive string comparison of moves fails because different move
+                        orders can reach the exact same board state.
+                    </p>
+
+                    <div class="diagram-box p-4 text-xs font-mono text-gray-400">
+                        <div class="flex justify-between items-center mb-2">
+                            <span>Sequence A:</span>
+                            <span class="text-white">1. d4 Nf6 2. c4</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span>Sequence B:</span>
+                            <span class="text-white">1. c4 Nf6 2. d4</span>
+                        </div>
+                        <div class="border-t border-gray-700 pt-2 text-center text-chess-accent">
+                            <i class="fa-solid fa-equals mr-2"></i> Identical Board State
+                        </div>
+                    </div>
+
+                    <p class="text-gray-400 leading-relaxed">
+                        To solve this, I utilize <strong>Polyglot (.bin)</strong> files. The engine generates a 64-bit
+                        Zobrist Hash of the current board position and performs a binary search O(log n) against the
+                        book file. This decouples the "state" from the "history," allowing for 100% accurate
+                        identification regardless of move order.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="glass-panel overflow-hidden">
+                        <div class="code-header">
+                            <span>analysis.py</span>
+                            <span>Zobrist Lookup Implementation</span>
+                        </div>
+                        <pre><code class="language-python">def analyze_book_status(board, reader):
+    """
+    Checks if the current board state exists in the master opening book.
+    Uses Zobrist hashing implicitly via the python-chess Polyglot reader.
+    """
+    try:
+        # reader.find() computes the Zobrist hash of 'board' 
+        # and seeks it in the binary tree of the .bin file.
+        entry = reader.find(board)
+        return True
+    except IndexError:
+        return False
+
+# In the main loop:
+if in_book and not new_in_book:
+    # Critical Transition Point detected
+    in_book = False
+    left_book_by = "white" if is_white_move else "black"
+    # This specific move index marks the end of "Theory"
+    # and the start of "Novelty" (or error).</code></pre>
+                    </div>
+
+                    <div class="mt-4 p-4 border border-chess-info/20 bg-chess-info/5 rounded text-sm text-chess-info">
+                        <strong class="block mb-1 font-mono uppercase text-xs">Engineering Takeaway</strong>
+                        By identifying the exact ply where <code>in_book</code> becomes False, we can isolate the
+                        "Transition Phase"—the 5-10 moves immediately following theory. This is often where amateur
+                        games are decided.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ACCURACY MODEL -->
+        <section id="accuracy" class="relative scroll-mt-32">
+            <div class="section-number">02</div>
+
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-8 order-2 lg:order-1">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold text-white mb-2">The Accuracy Model</h2>
+                        <p class="text-chess-accent font-mono text-sm">Algorithm: Exponential Decay Normalization</p>
+                    </div>
+
+                    <p class="text-gray-400 leading-relaxed">
+                        Raw engine evaluations use Centipawns (cp), where 100 cp ≈ 1 Pawn. However, a linear mapping of
+                        CP to Accuracy fails to model human perception. A blunder of -500cp (losing a Rook) is fatal,
+                        but the difference between -5000cp and -5500cp is irrelevant—the game is already lost.
+                    </p>
+
+                    <div class="glass-panel p-6">
+                        <h3 class="text-white font-bold mb-4 text-sm uppercase tracking-wider">The Formula</h3>
+                        <div class="math-formula block text-center mb-4 text-sm">
+                            Accuracy = 103.1668 * e^(-0.01 * cpl) - 3.1669
+                        </div>
+                        <ul class="text-sm text-gray-500 space-y-2 font-mono">
+                            <li class="flex justify-between"><span>Input (cpl):</span> <span>Centipawn Loss</span></li>
+                            <li class="flex justify-between"><span>0 cpl:</span> <span class="text-white">100%
+                                    Accuracy</span></li>
+                            <li class="flex justify-between"><span>100 cpl:</span> <span class="text-white">~35%
+                                    Accuracy</span></li>
+                        </ul>
+                    </div>
+
+                    <p class="text-gray-400 text-sm">
+                        This formula creates a sharp penalty curve. Small inaccuracies (10-30 cp) reduce score slightly,
+                        but any significant blunder drops the accuracy to near zero immediately. The constants
+                        (103.1668, 3.1669) are derived to normalize the output range strictly between 0 and 100.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7 order-1 lg:order-2">
+                    <div class="glass-panel overflow-hidden">
+                        <div class="code-header">
+                            <span>analysis.py</span>
+                            <span>Non-Linear Accuracy Calculation</span>
+                        </div>
+                        <pre><code class="language-python">def calc_accuracy(centipawn_loss, last_eval, current_eval):
+    last_score = last_eval["score"].white()
+    current_score = current_eval["score"].white()
+
+    # Edge Case: Forced Mates are perfect play
+    if last_score.is_mate() or current_score.is_mate():
+        return handle_forced_mate_accuracy(...)
+
+    # Core Formula implementation
+    # We use math.exp to create the decay curve
+    accuracy = 103.1668 * math.exp(-0.01 * centipawn_loss) - 3.1669
+    
+    # Clamp results to ensure valid 0-100 range
+    return max(0, min(100, accuracy))
+
+def classify_move(cpl, played_best, best_gap):
+    # Categorization buckets based on CPL
+    if played_best and best_gap > 300: return "Brilliancy" # !!
+    if played_best: return "Best"
+    elif cpl < 50: return "Great"      # !
+    elif cpl < 100: return "Good"
+    elif cpl < 200: return "Inaccuracy" # ?!
+    elif cpl < 1000: return "Mistake"   # ?
+    else: return "Blunder"             # ??</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PHASES & HEURISTICS -->
+        <section id="phases" class="relative scroll-mt-32">
+            <div class="section-number">03</div>
+
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-6 space-y-8">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold text-white mb-2">Dynamic Phase Detection</h2>
+                        <p class="text-chess-accent font-mono text-sm">Algorithm: Material & Move Count Heuristic</p>
+                    </div>
+
+                    <p class="text-gray-400 leading-relaxed">
+                        Defining when the "Middlegame" ends is subjective. To automate this, I implemented a heuristic
+                        function that evaluates the board state based on piece density and player rating.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="glass-panel p-4 border-t-2 border-green-500">
+                            <strong class="text-white block mb-2 text-sm">Opening</strong>
+                            <p class="text-xs text-gray-500 mb-2">Depends on move count + rating.</p>
+                            <code
+                                class="text-[10px] text-green-400 bg-black/50 p-1 block">moves <= 8 + (rating // 600)</code>
+                        </div>
+                        <div class="glass-panel p-4 border-t-2 border-chess-gold">
+                            <strong class="text-white block mb-2 text-sm">Middlegame</strong>
+                            <p class="text-xs text-gray-500 mb-2">Queens present + Active pieces.</p>
+                            <code
+                                class="text-[10px] text-chess-gold bg-black/50 p-1 block">queens >= 1 && pieces > 6</code>
+                        </div>
+                        <div class="glass-panel p-4 border-t-2 border-chess-error">
+                            <strong class="text-white block mb-2 text-sm">Endgame</strong>
+                            <p class="text-xs text-gray-500 mb-2">Low material density.</p>
+                            <code class="text-[10px] text-chess-error bg-black/50 p-1 block">else</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="glass-panel overflow-hidden h-full">
+                        <div class="code-header">
+                            <span>analysis.py</span>
+                            <span>Phase Heuristic</span>
+                        </div>
+                        <pre><code class="language-python">def game_phase(board: chess.Board, rating, state) -> str:
+    if state == "Endgame": return state # Endgames rarely revert
+
+    # Count High-Value Pieces (Queen, Rook, Bishop, Knight)
+    pieces = sum(len(board.pieces(p, c)) 
+                 for p in [QUEEN, ROOK, BISHOP, KNIGHT] 
+                 for c in [WHITE, BLACK])
+    
+    queens = len(board.pieces(QUEEN, WHITE)) + 
+             len(board.pieces(QUEEN, BLACK))
+
+    # Dynamic Opening Length
+    # Higher rated players play longer theory
+    if board.fullmove_number <= 8 + (rating // 600) and pieces > 12:
+         return "Opening"
+         
+    elif queens >= 1 and pieces > 6:
+         return "Middlegame"
+         
+    return "Endgame"</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: DATA AGGREGATION -->
+        <section id="data" class="relative scroll-mt-32">
+            <div class="section-number">04</div>
+            <div class="border-t border-chess-border pt-12">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold text-white mb-2">Data Aggregation & Insights</h2>
+                        <p class="text-chess-accent font-mono text-sm">Pipeline: MongoDB -> Python -> JSON</p>
+                    </div>
+                    <a href="https://chess-metrics.vercel.app/" target="_blank"
+                        class="hidden md:flex items-center gap-2 text-sm text-chess-accent hover:text-white transition-colors">
+                        View these insights live <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Insight Card 1 -->
+                    <div class="glass-panel p-6 hover:border-chess-accent/50 transition-colors">
+                        <div class="flex items-start justify-between mb-4">
+                            <i class="fa-solid fa-flag-checkered text-chess-error text-xl"></i>
+                            <span class="text-xs font-mono text-gray-500">data.py</span>
+                        </div>
+                        <h3 class="text-white font-bold mb-2">Result Normalization</h3>
+                        <p class="text-sm text-gray-400 mb-4">
+                            Distinguishing <strong>Skill Wins</strong> (Checkmate) from <strong>Clock Wins</strong>
+                            (Timeout). High timeout rates indicate "flagging" rather than positional dominance.
+                        </p>
+                        <code class="text-xs bg-black/30 p-2 rounded block text-gray-500">
+                            if 'timeout' in termination:<br>
+                            &nbsp;&nbsp;return 'timeout'
+                        </code>
+                    </div>
+
+                    <!-- Insight Card 2 -->
+                    <div class="glass-panel p-6 hover:border-chess-accent/50 transition-colors">
+                        <div class="flex items-start justify-between mb-4">
+                            <i class="fa-solid fa-database text-chess-info text-xl"></i>
+                            <span class="text-xs font-mono text-gray-500">analysis.py</span>
+                        </div>
+                        <h3 class="text-white font-bold mb-2">Blunder Database</h3>
+                        <p class="text-sm text-gray-400 mb-4">
+                            The system serializes the FEN (Forsyth-Edwards Notation) of every move classified as a
+                            "Blunder". This creates a personalized puzzle database for tactical training.
+                        </p>
+                        <code class="text-xs bg-black/30 p-2 rounded block text-gray-500">
+                            blunders.append({ "fen": fen, "eval": eval })
+                        </code>
+                    </div>
+
+                    <!-- Insight Card 3 -->
+                    <div class="glass-panel p-6 hover:border-chess-accent/50 transition-colors">
+                        <div class="flex items-start justify-between mb-4">
+                            <i class="fa-solid fa-route text-chess-gold text-xl"></i>
+                            <span class="text-xs font-mono text-gray-500">data.py</span>
+                        </div>
+                        <h3 class="text-white font-bold mb-2">Follow-up Accuracy</h3>
+                        <p class="text-sm text-gray-400 mb-4">
+                            Isolates the first 5 moves <em>after</em> leaving opening theory. This metric reveals if the
+                            player understands the plan or was just memorizing lines.
+                        </p>
+                        <code class="text-xs bg-black/30 p-2 rounded block text-gray-500">
+                            seq_moves = moves[left_idx : left_idx + 5]
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-chess-border bg-[#0e0e0c] py-12">
+        <div
+            class="max-w-6xl mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <a href="#" class="font-display font-bold text-lg text-white">ChessMetrics</a>
+                <p class="text-gray-500 text-sm mt-1">Open Source Analysis Engine</p>
+            </div>
+            <div class="flex gap-6 items-center">
+                <a href="https://chess-metrics.vercel.app/" target="_blank"
+                    class="text-chess-accent hover:text-white transition-colors font-medium text-sm">
+                    Open App
+                </a>
+                <div class="h-4 w-px bg-gray-800"></div>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i
+                        class="fa-brands fa-github text-xl"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors"><i
+                        class="fa-brands fa-twitter text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Prism JS for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+
+</html>
