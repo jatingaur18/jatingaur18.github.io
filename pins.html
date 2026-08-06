@@ -217,35 +217,38 @@
             const statusMessage = document.getElementById('status-message');
             statusMessage.innerHTML = 'Connecting to Pinterest...';
 
-            // Using a CORS proxy to fetch the RSS feed
             const rssUrl = `https://www.pinterest.com/jatingaur2512/${boardPath}.rss`;
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
+            // rss2json returns CORS-friendly JSON (allorigins and similar proxies are unreliable)
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
             try {
-                const response = await fetch(proxyUrl);
-                if (!response.ok) throw new Error('Network response was not ok');
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`Network response was not ok (${response.status})`);
 
-                const xmlText = await response.text();
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(xmlText, 'application/xml');
-                const items = xmlDoc.querySelectorAll('item');
+                const data = await response.json();
+                if (data.status !== 'ok') {
+                    throw new Error(data.message || 'Feed fetch failed');
+                }
 
+                const items = data.items || [];
                 if (items.length === 0) {
                     statusMessage.textContent = 'No pins found. Board may be private.';
                     statusMessage.classList.remove('loading');
                     return;
                 }
 
+                if (data.feed?.title) {
+                    document.getElementById('board-name').textContent = data.feed.title;
+                }
+
                 statusMessage.style.display = 'none';
 
                 items.forEach((item, index) => {
-                    const description = item.querySelector('description').textContent;
-                    // Extract image URL from CDATA/description HTML
-                    const match = description.match(/https?:\/\/i\.pinimg\.com\/[^"]+/);
+                    const description = item.description || item.content || '';
+                    const match = description.match(/https?:\/\/i\.pinimg\.com\/[^"'\s>]+/);
 
                     if (match) {
                         const imageUrl = match[0];
-                        // Try to get higher res
                         const highQualityUrl = imageUrl.replace(/\/\d+x\//, '/originals/');
 
                         const pinDiv = document.createElement('div');
@@ -253,21 +256,21 @@
                         pinDiv.style.opacity = '0';
                         pinDiv.style.transform = 'translateY(20px)';
 
-                        // Link wrapper
                         const link = document.createElement('a');
-                        link.href = item.querySelector('link').textContent;
-                        link.target = "_blank";
+                        link.href = item.link;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
 
                         const pinImage = document.createElement('img');
                         pinImage.src = highQualityUrl;
-                        pinImage.alt = item.querySelector('title')?.textContent || 'Pin';
+                        pinImage.alt = item.title || 'Pin';
+                        pinImage.loading = 'lazy';
 
                         link.appendChild(pinImage);
                         pinDiv.appendChild(link);
 
-                        // Optional: Add simple caption overlay
-                        const title = item.querySelector('title')?.textContent;
-                        if (title && title !== ' ') {
+                        const title = item.title;
+                        if (title && title.trim()) {
                             const caption = document.createElement('div');
                             caption.className = 'absolute bottom-0 left-0 w-full p-2 bg-gradient-to-t from-black/90 to-transparent text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-sans';
                             caption.textContent = title;
@@ -281,6 +284,12 @@
                             }, index * 50);
                         };
 
+                        pinImage.onerror = () => {
+                            // Fall back to the smaller RSS thumbnail if originals fails
+                            if (pinImage.src !== imageUrl) pinImage.src = imageUrl;
+                            else pinDiv.remove();
+                        };
+
                         pinContainer.appendChild(pinDiv);
                     }
                 });
@@ -289,8 +298,7 @@
                 console.error('Fetch error:', error);
                 statusMessage.innerHTML = `
                     <div class="text-chess-danger mb-2"><i class="fa-solid fa-triangle-exclamation"></i> Unable to load pins</div>
-                    <div class="text-xs text-gray-600">This often happens due to CORS restrictions when opening files directly (file://) or in sandboxed previews.</div>
-                    <div class="text-xs text-gray-600 mt-2">Try running this on a local web server (e.g., Live Server).</div>
+                    <div class="text-xs text-gray-600">Could not reach the Pinterest feed right now. Please try again in a moment.</div>
                 `;
                 statusMessage.classList.remove('loading');
             }
